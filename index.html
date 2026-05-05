@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BotSetupCoach.com — Done-For-You AI Setup for Business Owners</title>
-  <meta name="description" content="BotSetupCoach.com helps business owners implement a private AI assistant with done-for-you setup, onboarding, and support.">
+  <title>Bot Setup Service — AI That Actually Works For You</title>
+  <meta name="description" content="We work with you 1-on-1 to set up and master your own private AI bot assistant. Personalized onboarding, weekly consulting, and ongoing support.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -21,6 +21,8 @@
       --accent: #E8E8EC;
       --accent-hover: #ffffff;
       --orange: #E86A2A;
+      --orange-dim: rgba(232, 106, 42, 0.12);
+      --orange-glow: rgba(232, 106, 42, 0.06);
       --font: 'IBM Plex Sans', -apple-system, sans-serif;
       --mono: 'IBM Plex Mono', monospace;
     }
@@ -57,7 +59,9 @@
       margin-bottom: 28px;
     }
 
-    h1 em { font-style: italic; }
+    h1 em {
+      font-style: italic;
+    }
 
     h2 {
       font-size: clamp(1.1rem, 3vw, 1.3rem);
@@ -103,6 +107,7 @@
 
     .cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
+    /* Hero */
     .hero {
       padding: 160px 0 120px;
       border-bottom: 1px solid var(--border);
@@ -110,7 +115,7 @@
 
     .hero p {
       font-size: 1.15rem;
-      max-width: 560px;
+      max-width: 540px;
     }
 
     .hero .tag {
@@ -121,6 +126,12 @@
       letter-spacing: 0.02em;
     }
 
+    /* Problem */
+    .problem p strong {
+      color: var(--text);
+    }
+
+    /* Steps */
     .steps {
       display: flex;
       flex-direction: column;
@@ -139,6 +150,7 @@
     .step h2 { margin-bottom: 10px; }
     .step p { font-size: 1rem; }
 
+    /* Capabilities */
     .cap-list {
       list-style: none;
       display: flex;
@@ -166,6 +178,7 @@
       background: var(--orange);
     }
 
+    /* Offer */
     .offer-card {
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -223,6 +236,7 @@
       color: var(--text-faint);
     }
 
+    /* FAQ */
     .faq-item {
       padding: 28px 0;
       border-bottom: 1px solid var(--border);
@@ -252,7 +266,9 @@
       margin-left: 16px;
     }
 
-    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-item.open .faq-q::after {
+      transform: rotate(45deg);
+    }
 
     .faq-a {
       font-size: 0.95rem;
@@ -269,10 +285,12 @@
       opacity: 1;
     }
 
+    /* Divider accent */
     section.accent-divider {
       border-bottom: 1px solid rgba(232, 106, 42, 0.15);
     }
 
+    /* Footer */
     footer {
       padding: 60px 0;
       text-align: center;
@@ -286,14 +304,6 @@
       line-height: 1.8;
     }
 
-    footer a {
-      color: var(--text-faint);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover { color: var(--orange); }
-
     @media (max-width: 600px) {
       .hero { padding: 100px 0 80px; }
       section { padding: 72px 0; }
@@ -303,107 +313,125 @@
 </head>
 <body>
 
+  <!-- Hero -->
   <section class="hero">
     <div class="container">
       <p class="tag">BotSetupCoach.com</p>
-      <h1>Business owners who implement AI early <em>win bigger.</em></h1>
-      <p>We build your private OpenClaw assistant around your workflows so AI becomes a real operating advantage, not another tab you forget to use.</p>
-      <a href="#book" class="cta">Book Your Free Strategy Call</a>
+      <h1>You know AI matters. <em>You're just not using it.</em></h1>
+      <p>We work with you one-on-one to set up and master your own private AI assistant. You get a bot you can talk to anytime, from any device, that actually knows your business and gets better over time.</p>
+      <a href="#book" class="cta">Book Your Setup Call</a>
     </div>
   </section>
 
+  <!-- Problem -->
   <section class="problem accent-divider">
     <div class="container">
-      <h3>The opportunity</h3>
-      <h2>Most owners know AI matters. Few have it truly embedded into the business.</h2>
-      <p>You try a few prompts. You get mixed results. The team never adopts it. Nothing changes.</p>
-      <p>We implement a system that <strong>knows your context</strong>, <strong>remembers your business</strong>, and <strong>helps you execute faster</strong> across daily operations.</p>
+      <h3>The gap</h3>
+      <h2>Everyone has access to AI. Almost nobody has it working for them.</h2>
+      <p>You open ChatGPT. You type a question. You get an answer. You close the tab. That is not AI working for you. That is you working for AI.</p>
+      <p>Imagine something different. An assistant that <strong>knows your business</strong>. That <strong>remembers your conversations</strong>. That <strong>works in the background</strong> while you sleep. That <strong>messages you</strong> when something needs your attention. Always available on your phone or computer, by text or voice, whenever you need it.</p>
+      <p>That is what we build for you. Not just another chatbot. A real, private AI assistant that becomes one of the most useful tools in your business.</p>
     </div>
   </section>
 
+  <!-- How It Works -->
   <section>
     <div class="container">
       <h3>How it works</h3>
-      <h2>Simple delivery. High leverage.</h2>
+      <h2>We handle the technical side. You get the business advantage.</h2>
       <div class="steps">
         <div class="step">
           <div class="step-num">01</div>
-          <h2>Strategy + scope</h2>
-          <p>We map your highest ROI workflows and define the exact build.</p>
+          <h2>Setup call</h2>
+          <p>We learn how you work, what you need, and where AI can make the biggest impact. Then we build your assistant around your business, not the other way around.</p>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <h2>Implementation</h2>
-          <p>We set up and configure your assistant across your chosen devices and channels.</p>
+          <h2>Four weekly check-ins</h2>
+          <p>This is where the real value is. One-on-one calls where we help you discover what is possible and make sure you are getting full value from your assistant. Personalized to your business and goals.</p>
         </div>
         <div class="step">
           <div class="step-num">03</div>
-          <h2>Onboarding + support</h2>
-          <p>You get guided rollout, adoption support, and weekly check-ins during onboarding.</p>
+          <h2>Ongoing messaging support</h2>
+          <p>Questions between calls? Need help with something new? We are a message away. You never have to figure this out alone.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- What changes -->
   <section class="accent-divider">
     <div class="container">
       <h3>What changes</h3>
-      <h2>What owners get after setup</h2>
+      <h2>This is what your day looks like after.</h2>
       <ul class="cap-list">
-        <li>Faster research, decisions, and execution</li>
-        <li>Persistent memory across your projects and conversations</li>
-        <li>Proactive support through text or voice, on any device</li>
-        <li>Automated background tasks that save owner time weekly</li>
-        <li>Private infrastructure so your data stays yours</li>
+        <li>You wake up and your assistant has already caught you up on what matters</li>
+        <li>Important conversations, ideas, and decisions are remembered for you</li>
+        <li>Research that used to take hours takes minutes</li>
+        <li>Your notes and files stay organized</li>
+        <li>Tasks run in the background while you focus on high-value work</li>
+        <li>Reach your assistant by text or voice, from your phone or computer, anytime</li>
+        <li>Your data stays yours. Private setup. No public sharing of your business context.</li>
       </ul>
     </div>
   </section>
 
+  <!-- Offer -->
   <section id="book">
     <div class="container">
-      <h3>Offer</h3>
-      <h2>Done-for-you AI implementation for business owners</h2>
+      <h3>Get started</h3>
+      <h2>One-on-one AI implementation, built around your business.</h2>
       <div class="offer-card">
         <div class="price">$5,000</div>
-        <div class="price-sub">Fixed-fee setup + onboarding package</div>
+        <div class="price-sub">Setup + onboarding package</div>
         <ul class="offer-list">
-          <li>Implementation plan tailored to your workflows</li>
-          <li>Full OpenClaw installation and configuration</li>
-          <li>Channel + device connection for daily use</li>
-          <li>4 weekly onboarding/check-in calls</li>
-          <li>Ongoing messaging support during onboarding</li>
-          <li>Optional continued advisory after launch</li>
+          <li>Personal setup call to map your workflows and goals</li>
+          <li>Full installation and configuration of your private AI assistant</li>
+          <li>Connected to your phone, computer, and all your devices</li>
+          <li>4 weekly one-on-one consulting calls</li>
+          <li>Ongoing messaging support throughout onboarding</li>
+          <li>Additional support packages available after onboarding</li>
         </ul>
-        <a href="https://askmiguel.ai/schedule" class="cta" target="_blank" rel="noopener">Book Your Free Strategy Call</a>
+        <a href="https://askmiguel.ai/schedule" class="cta" target="_blank" rel="noopener">Book Your Setup Call</a>
       </div>
     </div>
   </section>
 
+  <!-- FAQ -->
   <section>
     <div class="container">
       <h3>Questions</h3>
       <div class="faq-item">
-        <div class="faq-q">Do I need to be technical?</div>
-        <div class="faq-a">No. We handle the technical build and guide you through practical use.</div>
+        <div class="faq-q">Is my data private?</div>
+        <div class="faq-a">Yes. Your assistant runs in a private setup. Your conversations, files, and business context remain under your control.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Is my data private?</div>
-        <div class="faq-a">Yes. Your setup runs on your own infrastructure and remains under your control.</div>
+        <div class="faq-q">Do I need to be technical?</div>
+        <div class="faq-a">Not at all. That is why this service exists. We handle the technical details so you can focus on running your business.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Are there ongoing costs?</div>
-        <div class="faq-a">Yes, hosting and model usage have ongoing costs. We explain expected ranges during the call so there are no surprises.</div>
+        <div class="faq-a">Yes. AI usage and hosting have their own costs. We walk you through expected ranges on the setup call. The $5,000 covers setup and onboarding.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Are you affiliated with OpenClaw?</div>
-        <div class="faq-a">BotSetupCoach is an independent implementation service built on top of OpenClaw.</div>
+        <div class="faq-q">What AI does it use?</div>
+        <div class="faq-a">We configure the best available models for your needs and goals. Your setup can evolve as better models are released.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Who is this for?</div>
+        <div class="faq-a">Business owners who want AI to become part of daily operations, not just an occasional tool they open in a browser tab.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are you affiliated with ChatGPT or other AI companies?</div>
+        <div class="faq-a">No. BotSetupCoach is an independent implementation service. We help you use the best tools together in a practical, private way.</div>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <div class="container">
-      <p>BotSetupCoach.com — independent implementation service<br>Built with <a href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a>.</p>
+      <p>An independent AI implementation service.<br>BotSetupCoach.com</p>
     </div>
   </footer>
 
