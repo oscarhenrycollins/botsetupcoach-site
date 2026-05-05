@@ -1,458 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BotSetupCoach.com — Your Own AI Chief of Staff</title>
-  <meta name="description" content="Done-for-you bot setup for business owners. One investment. Permanent advantage.">
+  <meta name="description" content="Done-for-you bot setup for business owners. One investment. Permanent advantage." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      --bg:#0f0f17;
+      --bg-card:#1a1a28;
+      --border:#3e3e50;
+      --text:#e2e8f0;
+      --text-dim:#94a3b8;
+      --text-bright:#f8fafc;
+      --yellow:#feca32; /* similar to that'smyaiguy primary (hsl 41 99% 60%) */
+      --yellow-light:#ffdb70;
+      --yellow-glow:rgba(254,202,50,.18);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Inter',-apple-system,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    a{color:var(--yellow-light);text-decoration:none}
+    a:hover{text-decoration:underline}
 
-    :root {
-      --bg: #0A0A0C;
-      --surface: #111114;
-      --border: #1E1E22;
-      --text: #E8E8EC;
-      --text-muted: #8A8A96;
-      --text-faint: #55555F;
-      --accent: #E8E8EC;
-      --accent-hover: #ffffff;
-      --orange: #E86A2A;
-      --orange-dim: rgba(232, 106, 42, 0.12);
-      --orange-glow: rgba(232, 106, 42, 0.06);
-      --font: 'IBM Plex Sans', -apple-system, sans-serif;
-      --mono: 'IBM Plex Mono', monospace;
+    .hero{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:64px 24px;
+      background:radial-gradient(ellipse at 50% 28%,var(--yellow-glow) 0%,transparent 62%);
+    }
+    .hero-tag{
+      font-size:13px;
+      color:var(--text-dim);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:20px;
+      font-weight:600;
+    }
+    h1{
+      font-size:clamp(2.1rem,5vw,3.6rem);
+      font-weight:800;
+      color:var(--text-bright);
+      letter-spacing:-.03em;
+      line-height:1.12;
+      max-width:760px;
+      margin-bottom:18px;
+    }
+    h1 span{
+      background:linear-gradient(135deg,var(--yellow),var(--yellow-light));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .subtitle{
+      font-size:clamp(1rem,2vw,1.18rem);
+      color:var(--text-dim);
+      max-width:680px;
+      line-height:1.65;
+      margin-bottom:34px;
+    }
+    .cta-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center}
+    .cta-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--yellow);color:#111;
+      padding:14px 30px;border-radius:12px;
+      font-size:16px;font-weight:700;border:none;cursor:pointer;
+      transition:all .15s;text-decoration:none;
+      box-shadow:0 4px 24px rgba(254,202,50,.30);
+    }
+    .cta-btn:hover{transform:translateY(-1px);background:#ffd759;text-decoration:none}
+    .cta-secondary{
+      display:inline-flex;align-items:center;
+      background:transparent;color:var(--text);
+      padding:14px 26px;border-radius:12px;
+      font-size:15px;font-weight:500;border:1px solid var(--border);
+      transition:all .15s;text-decoration:none;
+    }
+    .cta-secondary:hover{border-color:var(--yellow);text-decoration:none}
+
+    .section{padding:82px 24px}
+    .container{max-width:760px;margin:0 auto}
+    .section h2{
+      font-size:clamp(1.5rem,3vw,2rem);
+      font-weight:700;
+      color:var(--text-bright);
+      margin-bottom:12px;
+      letter-spacing:-.02em;
+      line-height:1.2;
+    }
+    .section .eyebrow{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.11em;
+      color:var(--text-dim);
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    .section p{color:var(--text-dim);font-size:15.5px;line-height:1.8;margin-bottom:16px}
+    .section p strong{color:var(--text-bright)}
+
+    .quote-card{
+      margin-top:20px;
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:24px;
+    }
+    .quote-line{
+      border-left:3px solid var(--yellow);
+      padding-left:16px;
+      margin-top:8px;
+      color:var(--text-bright);
+      font-weight:600;
+      line-height:1.65;
     }
 
-    html { font-size: 16px; scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:26px;
     }
-
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 24px;
+    .card{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:22px;
     }
+    .card h3{font-size:16px;font-weight:700;color:var(--text-bright);margin-bottom:8px}
+    .card p{font-size:13.5px;color:var(--text-dim);line-height:1.7;margin:0}
 
-    section {
-      padding: 100px 0;
-      border-bottom: 1px solid var(--border);
+    .steps{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+    .step{
+      display:flex;gap:14px;align-items:flex-start;
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:16px 18px;
     }
-
-    section:last-of-type { border-bottom: none; }
-
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 28px;
+    .step-num{
+      width:30px;height:30px;border-radius:8px;
+      background:var(--yellow-glow);
+      border:1px solid rgba(254,202,50,.4);
+      color:var(--yellow-light);
+      font-size:13px;font-weight:800;
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+      margin-top:2px;
     }
+    .step h4{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:4px}
+    .step p{font-size:13.5px;margin:0}
 
-    h1 em {
-      font-style: italic;
+    .offer-card{
+      margin-top:24px;
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:28px;
+      position:relative;
+      overflow:hidden;
     }
-
-    h2 {
-      font-size: clamp(1.1rem, 3vw, 1.3rem);
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      margin-bottom: 20px;
+    .offer-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--yellow),transparent);
+      opacity:.9;
     }
+    .price{font-size:clamp(2.1rem,5vw,3rem);font-weight:800;color:var(--text-bright);letter-spacing:-.03em}
+    .price-sub{font-size:13px;color:var(--text-dim);margin:4px 0 18px}
+    .offer-list{list-style:none;display:grid;gap:11px;margin:0 0 20px;padding:0}
+    .offer-list li{font-size:14px;color:var(--text-dim);padding-left:16px;position:relative}
+    .offer-list li::before{content:'•';position:absolute;left:0;color:var(--yellow)}
 
-    h3 {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-faint);
-      margin-bottom: 16px;
+    .faq-item{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:0 16px;
+      margin-top:10px;
     }
-
-    p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.7;
-      margin-bottom: 20px;
+    .faq-q{
+      font-size:15px;font-weight:600;color:var(--text-bright);
+      padding:15px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
     }
+    .faq-q::after{content:'+';color:var(--yellow);font-size:20px;line-height:1;transition:transform .2s}
+    .faq-item.open .faq-q::after{transform:rotate(45deg)}
+    .faq-a{max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease, opacity .3s ease;padding-right:10px}
+    .faq-a p{font-size:14px;margin:0 0 14px}
+    .faq-item.open .faq-a{max-height:220px;opacity:1}
 
-    p:last-child { margin-bottom: 0; }
-
-    .cta {
-      display: inline-block;
-      background: var(--accent);
-      color: var(--bg);
-      font-family: var(--font);
-      font-size: 0.9rem;
-      font-weight: 500;
-      padding: 14px 32px;
-      border: none;
-      border-radius: 6px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      margin-top: 12px;
+    .final-cta{
+      margin-top:28px;
+      background:linear-gradient(135deg,rgba(254,202,50,.12),rgba(254,202,50,.04));
+      border:1px solid rgba(254,202,50,.3);
+      border-radius:16px;
+      padding:22px;
+      text-align:center;
     }
+    .final-cta h3{font-size:24px;font-weight:800;color:var(--text-bright);line-height:1.25;margin-bottom:8px}
+    .final-cta p{font-size:14px;margin-bottom:16px;color:var(--text-dim)}
 
-    .cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    footer{padding:42px 24px;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--text-dim)}
 
-    /* Hero */
-    .hero {
-      padding: 160px 0 120px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      max-width: 540px;
-    }
-
-    .hero .tag {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--text-faint);
-      margin-bottom: 32px;
-      letter-spacing: 0.02em;
-    }
-
-    /* Problem */
-    .problem p strong {
-      color: var(--text);
-    }
-
-    /* Steps */
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-      margin-top: 48px;
-    }
-
-    .step-num {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--orange);
-      margin-bottom: 8px;
-      letter-spacing: 0.08em;
-    }
-
-    .step h2 { margin-bottom: 10px; }
-    .step p { font-size: 1rem; }
-
-    /* Capabilities */
-    .cap-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 36px;
-    }
-
-    .cap-list li {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      padding-left: 16px;
-      position: relative;
-    }
-
-    .cap-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--orange);
-    }
-
-    /* Offer */
-    .offer-card {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 48px 40px;
-      margin-top: 40px;
-      background: var(--surface);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .offer-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--orange), transparent);
-      opacity: 0.6;
-    }
-
-    .price {
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      font-weight: 500;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
-    }
-
-    .price-sub {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--text-faint);
-      margin-bottom: 32px;
-    }
-
-    .offer-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 36px;
-    }
-
-    .offer-list li {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      padding-left: 20px;
-      position: relative;
-    }
-
-    .offer-list li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--text-faint);
-    }
-
-    /* FAQ */
-    .faq-item {
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .faq-item:first-child { border-top: 1px solid var(--border); }
-
-    .faq-q {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 8px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-
-    .faq-q::after {
-      content: '+';
-      font-family: var(--mono);
-      font-size: 1.1rem;
-      color: var(--orange);
-      transition: transform 0.2s;
-      flex-shrink: 0;
-      margin-left: 16px;
-    }
-
-    .faq-item.open .faq-q::after {
-      transform: rotate(45deg);
-    }
-
-    .faq-a {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-      opacity: 0;
-    }
-
-    .faq-item.open .faq-a {
-      max-height: 220px;
-      opacity: 1;
-    }
-
-    /* Divider accent */
-    section.accent-divider {
-      border-bottom: 1px solid rgba(232, 106, 42, 0.15);
-    }
-
-    /* Footer */
-    footer {
-      padding: 60px 0;
-      text-align: center;
-    }
-
-    footer p {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text-faint);
-      letter-spacing: 0.02em;
-      line-height: 1.8;
-    }
-
-    @media (max-width: 600px) {
-      .hero { padding: 100px 0 80px; }
-      section { padding: 72px 0; }
-      .offer-card { padding: 32px 24px; }
+    @media(max-width:640px){
+      .grid-2{grid-template-columns:1fr}
+      .hero{padding-top:88px}
     }
   </style>
 </head>
 <body>
-
-  <!-- Hero -->
   <section class="hero">
-    <div class="container">
-      <p class="tag">Your Own AI Chief of Staff</p>
-      <h1>You know AI matters. <em>You're just not using it.</em></h1>
-      <p>We build you a private AI bot that knows your business, supports your operations, and works while you sleep. Not just another chatbot. A real operating partner.</p>
-      <a href="#book" class="cta">Book Your Setup Call</a>
+    <p class="hero-tag">Your Own AI Chief of Staff</p>
+    <h1>You know AI matters. <span>You're just not using it.</span></h1>
+    <p class="subtitle">We build you a private AI bot that knows your business, supports your operations, and works while you sleep. Not just another chatbot. A real operating partner.</p>
+    <div class="cta-group">
+      <a class="cta-btn" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Your Setup Call</a>
+      <a class="cta-secondary" href="#offer">See $5K Offer</a>
     </div>
   </section>
 
-  <!-- Problem -->
-  <section class="problem accent-divider">
+  <section class="section">
     <div class="container">
-      <h3>The gap</h3>
+      <p class="eyebrow">The gap</p>
       <h2>Everyone has access to AI. Almost nobody has it working for them.</h2>
-      <p>You open ChatGPT. You type a question. You get an answer. You close the tab. That is not AI working for you. That is you working for AI.</p>
-      <p>Imagine something different. An assistant that <strong>knows your business</strong>. That <strong>remembers your conversations</strong>. That <strong>works in the background</strong> while you sleep. That <strong>messages you</strong> when something needs your attention. Always available on your phone or computer, by text or voice, whenever you need it.</p>
-      <p>That is what we build for you. Not just another chatbot. A real, private AI assistant that becomes one of the most useful tools in your business.</p>
-    </div>
-  </section>
-
-  <!-- How It Works -->
-  <section>
-    <div class="container">
-      <h3>How it works</h3>
-      <h2>We handle the technology. You get the business advantage.</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <h2>Setup call</h2>
-          <p>We learn how you work, what you need, and where AI can create the biggest impact. Then we design your bot around your business, not the other way around.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <h2>Four weekly check-ins</h2>
-          <p>This is where the real value is. One-on-one calls where we unlock new capabilities and make sure your bot is delivering real value to your business.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <h2>Ongoing messaging support</h2>
-          <p>Questions between calls? Need something new? We are a message away. You never have to figure this out alone.</p>
-        </div>
+      <div class="quote-card">
+        <p>You open ChatGPT. You type a question. You get an answer. You close the tab.</p>
+        <p class="quote-line">That is not AI working for you. That is you working for AI.</p>
       </div>
+      <p style="margin-top:16px">Imagine something different: a bot that <strong>knows your business</strong>, <strong>remembers your conversations</strong>, <strong>runs in the background</strong>, and <strong>messages you</strong> when something needs attention.</p>
+      <p>That is what we build for you.</p>
     </div>
   </section>
 
-  <!-- What changes -->
-  <section class="accent-divider">
+  <section class="section" id="offer">
     <div class="container">
-      <h3>What changes</h3>
-      <h2>This is what your day looks like after.</h2>
-      <ul class="cap-list">
-        <li>You wake up and your bot has already caught you up on what matters</li>
-        <li>Important conversations, ideas, and decisions are remembered for you</li>
-        <li>Research that used to take hours takes minutes</li>
-        <li>Your notes and files stay organized</li>
-        <li>Tasks run in the background while you focus on high-value work</li>
-        <li>Reach your bot by text or voice, from your phone or computer, anytime</li>
-        <li>Your data stays yours. Private setup. No public sharing of your business context.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Offer -->
-  <section id="book">
-    <div class="container">
-      <h3>Pricing</h3>
+      <p class="eyebrow">Pricing</p>
       <h2>One investment. Permanent advantage.</h2>
       <div class="offer-card">
         <div class="price">$5,000</div>
         <div class="price-sub">One-time setup + onboarding package</div>
         <ul class="offer-list">
-          <li>Personal setup call to map your workflows and goals</li>
-          <li>Full installation and configuration of your private AI bot</li>
-          <li>Connected to your phone, computer, and all your devices</li>
-          <li>4 weekly one-on-one consulting calls</li>
-          <li>Ongoing messaging support throughout onboarding</li>
-          <li>Additional support packages available after onboarding</li>
+          <li>Personal strategy call to map your workflows</li>
+          <li>Full private AI bot setup and configuration</li>
+          <li>Connected to your phone, computer, and tools</li>
+          <li>4 weekly one-on-one optimization calls</li>
+          <li>Ongoing messaging support during onboarding</li>
+          <li>Optional follow-on support packages</li>
         </ul>
-        <a href="https://askmiguel.ai/schedule" class="cta" target="_blank" rel="noopener">Book Your Setup Call</a>
-        <p style="margin-top:16px;font-size:13px;color:#6b7280">Built in days, not months.</p>
+        <a class="cta-btn" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Your Setup Call</a>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section>
+  <section class="section">
     <div class="container">
-      <h3>Questions</h3>
-      <div class="faq-item">
-        <div class="faq-q">Is my data private?</div>
-        <div class="faq-a">Yes. Your assistant runs in a private setup. Your conversations, files, and business context remain under your control.</div>
+      <p class="eyebrow">What changes</p>
+      <h2>This is what your day looks like after.</h2>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Before</h3>
+          <p>Random prompts. One-off answers. No memory. No system.</p>
+        </article>
+        <article class="card">
+          <h3>After</h3>
+          <p>A private bot that remembers, automates, and helps you execute daily.</p>
+        </article>
+        <article class="card">
+          <h3>Before</h3>
+          <p>Manual checking, repeated tasks, and constant context switching.</p>
+        </article>
+        <article class="card">
+          <h3>After</h3>
+          <p>Proactive updates, background tasks, and a clear operating rhythm.</p>
+        </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2>We handle the technology. You get the business advantage.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h4>Setup call</h4>
+            <p>We map your workflows, bottlenecks, and highest-leverage use cases.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h4>Build + connect</h4>
+            <p>We deploy and configure your private bot across your channels and tools.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h4>4 weekly check-ins</h4>
+            <p>We optimize, train, and expand your setup so you keep compounding value.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="final-cta">
+        <h3>Stop working for AI. Make AI work for you.</h3>
+        <p>Book your setup call and we’ll map your fastest path to a working AI operating system.</p>
+        <a class="cta-btn" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Your Setup Call</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Questions</p>
+      <h2>Everything you need to know.</h2>
+
       <div class="faq-item">
         <div class="faq-q">Do I need to be technical?</div>
-        <div class="faq-a">Not at all. That is why this service exists. We handle the technical details so you can focus on running your business.</div>
+        <div class="faq-a"><p>No. We handle the technical setup and guide you through practical usage.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is my data private?</div>
+        <div class="faq-a"><p>Yes. Your setup is private and under your control.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Are there ongoing costs?</div>
-        <div class="faq-a">Yes. AI usage and hosting have their own costs. We walk you through expected ranges on the setup call. The $5,000 covers setup and onboarding.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What AI does it use?</div>
-        <div class="faq-a">We configure the best available models for your needs and goals. Your setup can evolve as better models are released.</div>
+        <div class="faq-a"><p>Yes. Hosting and model usage have ongoing costs. We explain expected ranges on your call.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Who is this for?</div>
-        <div class="faq-a">Business owners who want AI to become part of daily operations, not just an occasional tool they open in a browser tab.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What if I don't see value quickly?</div>
-        <div class="faq-a">The whole point is fast practical wins. We stay hands-on through onboarding and keep optimizing until your setup is producing clear value.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Are you affiliated with ChatGPT or other AI companies?</div>
-        <div class="faq-a">No. BotSetupCoach is an independent implementation service. We help you use the best tools together in a practical, private way.</div>
+        <div class="faq-a"><p>Business owners who want AI embedded into daily operations, not just occasional prompt usage.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="accent-divider">
-    <div class="container">
-      <h2>Stop working for AI. Make AI work for you.</h2>
-      <p>One investment. Your private AI bot, built and running fast.</p>
-      <a href="https://askmiguel.ai/schedule" class="cta" target="_blank" rel="noopener">Book Your Setup Call</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer>
-    <div class="container">
-      <p>An independent AI implementation service.<br>BotSetupCoach.com</p>
-    </div>
+    BotSetupCoach.com — independent AI implementation service
   </footer>
 
   <script>
     document.querySelectorAll('.faq-q').forEach(q => {
-      q.addEventListener('click', () => {
-        q.parentElement.classList.toggle('open');
-      });
+      q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
     });
   </script>
 </body>
