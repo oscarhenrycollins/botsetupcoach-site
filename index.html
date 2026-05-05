@@ -1,364 +1,335 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BotSetupCoach — $5K Done-For-You AI Setup</title>
-  <meta name="description" content="Done-for-you OpenClaw setup for business owners. One clear system. Built for your workflows. $5,000 fixed fee." />
-  <meta property="og:title" content="BotSetupCoach" />
-  <meta property="og:description" content="$5K done-for-you AI setup for business owners." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0b1020" />
+  <title>BotSetupCoach — Done-For-You AI Setup</title>
+  <meta name="description" content="Done-for-you AI setup for business owners. $5,000 fixed-fee implementation." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
-      --bg: #070b16;
-      --bg2: #101a33;
-      --card: rgba(255,255,255,0.06);
-      --line: rgba(255,255,255,0.12);
-      --text: #eaf0ff;
-      --muted: #a7b3cf;
-      --accent: #6ee7ff;
-      --accent2: #7c8cff;
-      --ok: #7ef5b8;
+      --bg: #0B0B0D;
+      --text: #F2F2F2;
+      --muted: #AAAAAA;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.16);
+      --card: rgba(20,20,22,0.85);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: radial-gradient(1200px 700px at 10% -10%, #1c2f5d 0%, transparent 50%),
-                  radial-gradient(900px 600px at 90% 0%, #24356c 0%, transparent 45%),
-                  linear-gradient(180deg, var(--bg), var(--bg2));
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
-      line-height: 1.45;
+      font-size: 16px;
+      line-height: 1.75;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
     }
 
-    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
 
     .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0;
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(12px);
-      z-index: 10;
+      margin-bottom: 34px;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 24px rgba(110,231,255,0.7);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      font-weight: 700;
-      text-decoration: none;
-      transition: .2s ease;
-    }
-
-    .btn-primary {
-      color: #05111d;
-      background: linear-gradient(135deg, var(--accent), #9be8ff);
-      box-shadow: 0 10px 30px rgba(110,231,255,0.28);
-    }
-
-    .btn-primary:hover { transform: translateY(-2px); }
-
-    .btn-ghost {
+      font-size: 15px;
       color: var(--text);
-      border-color: var(--line);
-      background: rgba(255,255,255,0.02);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: -0.2px;
     }
 
-    .hero {
-      padding: 56px 0 24px;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 30px;
-      align-items: center;
+    .nav-cta {
+      text-decoration: none;
+      background: var(--text);
+      color: var(--bg);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity .15s;
     }
+
+    .nav-cta:hover { opacity: .88; }
 
     .badge {
-      display: inline-flex;
-      border: 1px solid rgba(126,245,184,0.35);
-      color: var(--ok);
-      background: rgba(126,245,184,0.1);
+      display: inline-block;
+      border: 1px solid var(--line-strong);
+      color: var(--muted);
       border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .2px;
+      padding: 4px 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
       margin-bottom: 16px;
     }
 
     h1 {
-      font-size: clamp(32px, 6vw, 62px);
-      line-height: 1.06;
-      letter-spacing: -1.4px;
-      margin-bottom: 16px;
-      max-width: 15ch;
+      font-size: clamp(30px, 6vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      font-weight: 300;
+      margin-bottom: 14px;
+      color: var(--text);
     }
 
-    .lead {
+    .sub {
       color: var(--muted);
-      font-size: clamp(16px, 2vw, 20px);
-      max-width: 55ch;
-      margin-bottom: 24px;
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 26px;
+      max-width: 62ch;
     }
 
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 13px 18px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: opacity .15s;
+      border: 1px solid var(--line);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: transparent;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn:hover { opacity: .9; }
 
     .micro {
-      color: #8ea0c7;
+      color: #888;
       font-size: 13px;
-    }
-
-    .price-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 22px;
-      backdrop-filter: blur(8px);
-    }
-
-    .price-top {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .price {
-      font-size: 48px;
-      font-weight: 900;
-      letter-spacing: -1px;
-      color: #f2f7ff;
-    }
-
-    .price-label { color: #9fb0d3; font-weight: 600; }
-
-    .checks {
-      display: grid;
-      gap: 10px;
-      color: #d7e2fa;
-      font-size: 15px;
-      margin-top: 12px;
-    }
-
-    .checks div::before {
-      content: "✓";
-      color: var(--ok);
-      margin-right: 10px;
-      font-weight: 900;
-    }
-
-    .section {
-      padding: 44px 0;
-    }
-
-    .section h2 {
-      font-size: clamp(26px, 4vw, 40px);
-      letter-spacing: -1px;
-      margin-bottom: 10px;
-    }
-
-    .section p.head {
-      color: var(--muted);
-      margin-bottom: 22px;
-      max-width: 68ch;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      margin-bottom: 28px;
     }
 
     .card {
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px;
+      border-radius: 14px;
+      padding: 20px;
+      margin: 22px 0;
+      backdrop-filter: blur(14px);
     }
 
-    .card h3 { font-size: 18px; margin-bottom: 6px; }
-    .card p { color: var(--muted); font-size: 14px; }
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .price strong {
+      font-family: 'IBM Plex Mono', Menlo, monospace;
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .price span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .list {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    .list li {
+      color: var(--muted);
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .list li:last-child { border-bottom: none; }
+    .list li strong { color: var(--text); font-weight: 400; }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin: 34px 0 10px;
+      color: var(--text);
+    }
+
+    p { color: var(--muted); margin-bottom: 12px; }
 
     .steps {
       display: grid;
-      gap: 12px;
+      gap: 10px;
+      margin-top: 14px;
     }
 
     .step {
-      display: grid;
-      grid-template-columns: 44px 1fr;
-      gap: 12px;
-      align-items: start;
-      background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    .n {
-      width: 32px;
-      height: 32px;
       border-radius: 10px;
-      background: rgba(110,231,255,.18);
-      border: 1px solid rgba(110,231,255,.32);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
+      padding: 14px;
+      background: rgba(255,255,255,0.01);
     }
 
-    .cta-band {
-      margin: 36px 0 52px;
-      padding: 26px;
-      border-radius: 18px;
-      border: 1px solid rgba(126,245,184,0.35);
-      background: linear-gradient(135deg, rgba(126,245,184,.1), rgba(124,140,255,.1));
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-      justify-content: space-between;
+    .step .n {
+      font-family: 'IBM Plex Mono', Menlo, monospace;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 4px;
     }
 
-    .cta-band p { color: #d8e4ff; }
+    .step h3 {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .step p { font-size: 14px; margin: 0; }
+
+    .final {
+      margin-top: 30px;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .final h3 {
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .final p { margin-bottom: 14px; }
 
     footer {
-      padding: 24px 0 40px;
-      color: #91a4cd;
-      font-size: 13px;
-      border-top: 1px solid rgba(255,255,255,0.07);
+      margin-top: 34px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      color: #777;
     }
 
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .grid-3 { grid-template-columns: 1fr; }
-      h1 { max-width: 18ch; }
-      .nav { position: static; }
+    @media (max-width: 540px) {
+      .nav { gap: 10px; align-items: flex-start; flex-direction: column; }
+      .price { flex-direction: column; gap: 2px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <main class="wrap">
     <nav class="nav">
-      <div class="brand"><span class="dot"></span> BotSetupCoach</div>
-      <a class="btn btn-primary" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Free Call</a>
+      <a class="brand" href="#">BotSetupCoach.com</a>
+      <a class="nav-cta" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Free Call</a>
     </nav>
 
-    <header class="hero">
-      <div>
-        <span class="badge">For business owners</span>
-        <h1>The biggest AI winners are the owners who implement first.</h1>
-        <p class="lead">
-          We build your custom OpenClaw system for you. No guessing. No endless tools. Just a working setup your team can use immediately.
-        </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Free Strategy Call</a>
-          <a class="btn btn-ghost" href="#offer">See What You Get</a>
-        </div>
-        <p class="micro">1:1 setup • Clear delivery plan • Built around your actual workflows</p>
+    <section>
+      <span class="badge">Done-for-you service</span>
+      <h1>AI is moving fast.<br/>Business owners who implement now win.</h1>
+      <p class="sub">BotSetupCoach helps you adopt AI inside your real business workflows. We build the system with you, for you, so your team can use it immediately.</p>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Free Strategy Call</a>
+        <a class="btn btn-secondary" href="#offer">See the $5K Offer</a>
       </div>
+      <p class="micro">Concise scope. Fixed fee. Practical implementation.</p>
+    </section>
 
-      <aside class="price-card" id="offer">
-        <div class="price-top">
-          <div class="price">$5,000</div>
-          <div class="price-label">fixed-fee implementation</div>
-        </div>
-        <div class="checks">
-          <div>Custom OpenClaw setup for your business</div>
-          <div>Tool + workflow integration for daily operations</div>
-          <div>Guided onboarding for you and your team</div>
-          <div>Post-launch support window</div>
-        </div>
-      </aside>
-    </header>
+    <section id="offer" class="card">
+      <div class="price">
+        <strong>$5,000</strong>
+        <span>fixed-fee implementation</span>
+      </div>
+      <ul class="list">
+        <li><strong>Custom OpenClaw setup</strong> aligned to your operations</li>
+        <li><strong>Workflow implementation</strong> for real day-to-day use</li>
+        <li><strong>Owner + team onboarding</strong> so adoption actually happens</li>
+        <li><strong>Post-launch support</strong> to stabilize results</li>
+      </ul>
+    </section>
 
-    <section class="section">
+    <section>
       <h2>What this solves</h2>
-      <p class="head">Most businesses don’t fail on AI because of ideas. They fail on implementation. BotSetupCoach turns AI from “interesting” into “running inside your business.”</p>
-      <div class="grid-3">
-        <article class="card">
-          <h3>Too many tools</h3>
-          <p>We simplify your stack and build one practical operating system your team can actually run.</p>
-        </article>
-        <article class="card">
-          <h3>No clear owner</h3>
-          <p>You get direct implementation leadership from call to deployment.</p>
-        </article>
-        <article class="card">
-          <h3>No time to figure it out</h3>
-          <p>Done-for-you setup means you move now instead of spending months testing randomly.</p>
-        </article>
-      </div>
+      <p>Most businesses don’t fail from lack of AI ideas. They fail from inconsistent execution. This is built to close that gap quickly.</p>
+      <ul class="list">
+        <li>Too many disconnected tools</li>
+        <li>No clear implementation owner</li>
+        <li>No repeatable process the team can run</li>
+      </ul>
     </section>
 
-    <section class="section">
+    <section>
       <h2>Simple 3-step delivery</h2>
-      <p class="head">Fast path from strategy to execution.</p>
       <div class="steps">
-        <div class="step">
-          <div class="n">1</div>
-          <div>
-            <h3>Free strategy call</h3>
-            <p class="micro">We map your bottlenecks and define where AI creates immediate ROI.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="n">2</div>
-          <div>
-            <h3>Build + setup</h3>
-            <p class="micro">We implement your BotSetupCoach system and connect it to real workflows.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="n">3</div>
-          <div>
-            <h3>Launch + train</h3>
-            <p class="micro">You and your team get a live walkthrough, usage playbook, and support runway.</p>
-          </div>
-        </div>
+        <article class="step">
+          <div class="n">01</div>
+          <h3>Strategy Call</h3>
+          <p>We define your highest-leverage use cases and scope the build.</p>
+        </article>
+        <article class="step">
+          <div class="n">02</div>
+          <h3>Build + Setup</h3>
+          <p>We implement your system and connect it to your actual workflows.</p>
+        </article>
+        <article class="step">
+          <div class="n">03</div>
+          <h3>Launch + Onboard</h3>
+          <p>You get a clear handoff, team walkthrough, and support runway.</p>
+        </article>
       </div>
     </section>
 
-    <section class="cta-band">
-      <p><strong>Ready to build your AI operating advantage?</strong><br/>Book a free call to see if your business is a fit for the $5K setup program.</p>
-      <a class="btn btn-primary" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Free Call</a>
+    <section class="final">
+      <h3>Ready to make AI operational in your business?</h3>
+      <p>Book a free strategy call to see if you’re a fit for BotSetupCoach.</p>
+      <a class="btn btn-primary" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Free Strategy Call</a>
     </section>
 
     <footer>
-      © <span id="year"></span> BotSetupCoach. Done-for-you AI setup for business owners.
+      © <span id="year"></span> BotSetupCoach · Built for business owners
     </footer>
-  </div>
+  </main>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
