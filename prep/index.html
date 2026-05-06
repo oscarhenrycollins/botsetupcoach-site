@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">BotSetupCoach — Get Ready 🦾</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦾</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
+  .page { max-width: 720px; margin: 0 auto; padding: 0 24px 100px; }
+
+  .hero-banner {
+    text-align: center;
+    padding: 60px 24px 48px;
+    background: linear-gradient(180deg, #0a0a0a 0%, #10181f 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero-banner::before {
+    content: '';
+    position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(112,219,194,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-banner * { position: relative; z-index: 1; }
+  .confirmed-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(112,219,194,0.15); border: 2px solid rgba(112,219,194,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; margin: 0 auto 24px;
+  }
+  .hero-banner h1 {
+    font-size: clamp(28px, 5vw, 44px); font-weight: 900;
+    line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 12px;
+  }
+  .hero-banner h1 .accent { color: #70dbc2; }
+  .hero-banner .subtitle {
+    font-size: 18px; color: #9ca3af; max-width: 560px; margin: 0 auto;
+  }
+  .personalized-name { color: #70dbc2; font-weight: 700; }
+
+  .booking-card {
+    background: linear-gradient(145deg, #142028, #10181f);
+    border: 1px solid rgba(112,219,194,0.25); border-radius: 16px;
+    padding: 28px; margin: -20px auto 40px; max-width: 720px;
+    position: relative; z-index: 2;
+  }
+  .booking-card-title {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 2px; color: #70dbc2; margin-bottom: 16px;
+  }
+  .booking-detail {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 15px;
+  }
+  .booking-detail:last-child { border-bottom: none; }
+  .booking-detail .label { color: #6b7280; min-width: 80px; flex-shrink: 0; }
+  .booking-detail .value { color: #fff; font-weight: 600; overflow-wrap: break-word; word-break: break-word; min-width: 0; }
+  .booking-detail .value a { color: #70dbc2; text-decoration: none; }
+
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; color: #70dbc2; margin-bottom: 20px;
+  }
+  .checklist-label { font-size: 18px; font-weight: 800; margin-bottom: 16px; }
+  .checklist-label.must { color: #fff; }
+  .checklist-label.nice { color: #9ca3af; }
+  .checklist { list-style: none; display: grid; gap: 12px; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: #111827; border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 16px 20px; font-size: 15px;
+    color: #d1d5db; transition: border-color 0.2s; overflow-wrap: break-word; word-break: break-word;
+  }
+  .checklist li:hover { border-color: rgba(112,219,194,0.25); }
+  .checklist li .icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .checklist li a { color: #70dbc2; text-decoration: none; font-weight: 600; }
+
+  .info-card {
+    background: linear-gradient(145deg, #142028, #10181f);
+    border: 1px solid rgba(112,219,194,0.15); border-radius: 16px;
+    padding: 28px; margin-bottom: 16px;
+  }
+  .info-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+  .info-card p, .info-card a { font-size: 15px; color: #9ca3af; }
+  .info-card a { color: #70dbc2; text-decoration: none; font-weight: 600; }
+
+  .timeline { display: grid; gap: 12px; }
+  .timeline-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-num {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(112,219,194,0.12); color: #70dbc2;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900; flex-shrink: 0;
+  }
+  .timeline-text strong { color: #fff; }
+  .timeline-text { font-size: 15px; color: #9ca3af; }
+
+  .cost-row {
+    display: flex; justify-content: space-between; padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 15px; color: #d1d5db;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-row .amount { color: #70dbc2; font-weight: 700; }
+
+  .prep-footer {
+    text-align: center; padding-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.06); margin-top: 48px;
+  }
+  .prep-footer p { font-size: 15px; color: #6b7280; }
+
+  .spam-notice {
+    text-align: center; font-size: 14px; color: #9ca3af;
+    background: #111827; border: 1px solid rgba(112,219,194,0.2);
+    border-radius: 12px; padding: 14px 20px; margin: -8px auto 40px;
+    max-width: 720px;
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 0 16px 80px; }
+    .booking-card { padding: 20px; margin-left: 16px; margin-right: 16px; }
+    .info-card { padding: 20px; }
+    .booking-detail { flex-direction: column; gap: 2px; }
+    .booking-detail .label { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero-banner">
+  <div class="confirmed-icon" id="hero-icon">🦾</div>
+  <h1 id="hero-heading">Get <span class="accent">Ready</span></h1>
+  <p class="subtitle" id="hero-subtitle">Here’s everything you need before your setup call.</p>
+</div>
+
+<div class="page">
+
+  <div class="booking-card" id="booking-card" style="display:none;">
+    <div class="booking-card-title">Your Setup Call</div>
+    <div class="booking-detail" id="detail-name" style="display:none;"><span class="label">Name</span><span class="value" id="val-name"></span></div>
+    <div class="booking-detail" id="detail-date" style="display:none;"><span class="label">Date</span><span class="value" id="val-date"></span></div>
+    <div class="booking-detail" id="detail-time" style="display:none;"><span class="label">Time</span><span class="value" id="val-time"></span></div>
+    <div class="booking-detail" id="detail-email" style="display:none;"><span class="label">Email</span><span class="value" id="val-email"></span></div>
+    <div class="booking-detail" id="detail-location" style="display:none;"><span class="label">Where</span><span class="value" id="val-location"></span></div>
+  </div>
+
+  <div class="spam-notice" id="spam-notice" style="display:none;">📬 Don’t see the calendar invite? Check spam/junk.</div>
+
+  <div class="section">
+    <div class="section-title">Prep Checklist</div>
+    <p style="color:#9ca3af;font-size:15px;margin-bottom:24px;">Knock out what you can in advance. If not, we’ll handle it live together.</p>
+    <div class="checklist-label must">Must Have (Before Call)</div>
+    <ul class="checklist" style="margin-bottom:28px;">
+      <li><span class="icon">💻</span> A computer (Mac or Windows, not a tablet)</li>
+      <li><span class="icon">🌐</span> Stable internet connection</li>
+      <li><span class="icon">💳</span> A card for hosting and AI subscriptions</li>
+    </ul>
+    <div class="checklist-label nice">Nice to Have (Can be done during call)</div>
+    <ul class="checklist">
+      <li><span class="icon">💬</span> Telegram installed on phone + desktop</li>
+      <li><span class="icon">🧠</span> Claude account ready</li>
+      <li><span class="icon">🔍</span> Brave Search API key</li>
+      <li><span class="icon">🤖</span> Telegram bot token from @BotFather</li>
+      <li><span class="icon">🔗</span> Tailscale account installed on devices</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What’s Included</div>
+    <div class="info-card">
+      <h3>🛠 Setup Session</h3>
+      <p>We build your bot live and get it running on your core devices/workflows.</p>
+    </div>
+    <div class="info-card">
+      <h3>📞 4 Weeks of Ongoing Support</h3>
+      <p>Hands-on guidance during setup period. If 4 weeks isn’t enough, we continue in good faith until setup goals are complete.</p>
+    </div>
+    <div class="info-card">
+      <h3>💬 Async Support</h3>
+      <p>You’ll have a support channel for questions between sessions.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Your Setup Timeline</div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-num">1</div><div class="timeline-text"><strong>Week 1:</strong> Setup core bot + first workflows</div></div>
+      <div class="timeline-item"><div class="timeline-num">2</div><div class="timeline-text"><strong>Week 2:</strong> Connect channels + automations</div></div>
+      <div class="timeline-item"><div class="timeline-num">3</div><div class="timeline-text"><strong>Week 3:</strong> Expand capabilities for your use cases</div></div>
+      <div class="timeline-item"><div class="timeline-num">4</div><div class="timeline-text"><strong>Week 4:</strong> Polish, handoff, and adoption plan</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Ongoing Costs (After Setup)</div>
+    <div class="cost-row"><span>Cloud server</span><span class="amount">~$11-25/mo</span></div>
+    <div class="cost-row"><span>AI model usage</span><span class="amount">~$20-200/mo</span></div>
+    <div class="cost-row"><span>Brave Search API</span><span class="amount">$5/mo</span></div>
+  </div>
+
+  <div class="prep-footer">
+    <p>If you have questions before your call, reply to your confirmation email.</p>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+
+  var firstName = params.get('attendeeFirstName') || '';
+  var lastName = params.get('attendeeLastName') || '';
+  var name = params.get('attendeeName') || params.get('name') || '';
+  if (firstName) name = firstName + (lastName ? ' ' + lastName : '');
+  name = name.trim();
+
+  var email = params.get('email') || '';
+  var startTime = params.get('startTime') || params.get('attendeeStartTime') || '';
+  var location = params.get('location') || '';
+  var isConfirmed = !!(name || startTime || email);
+
+  function esc(str) {
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function formatLocation(loc) {
+    var map = {
+      'integrations:google:meet': 'Google Meet',
+      'integrations:zoom': 'Zoom',
+      'integrations:daily': 'Cal Video',
+      'phone': 'Phone Call'
+    };
+    if (map[loc]) return map[loc];
+    for (var key in map) if (loc.startsWith(key)) return map[key];
+    if (loc.startsWith('integrations:')) {
+      var parts = loc.replace('integrations:', '').split(':');
+      return parts.map(function(p){ return p.charAt(0).toUpperCase()+p.slice(1); }).join(' ');
+    }
+    return loc;
+  }
+
+  if (isConfirmed) {
+    document.getElementById('page-title').textContent = 'BotSetupCoach — Booking Confirmed 🦾';
+    document.getElementById('hero-icon').textContent = '✅';
+    document.getElementById('hero-heading').innerHTML = 'Booking <span class="accent">Confirmed</span>';
+
+    var first = name ? name.split(' ')[0] : '';
+    if (first) {
+      document.getElementById('hero-subtitle').innerHTML =
+        "You're in, <span class=\"personalized-name\">" + esc(first) + "</span>. Check your email invite. Here’s your prep checklist.";
+    } else {
+      document.getElementById('hero-subtitle').textContent =
+        "You're in. Check your email invite. Here’s your prep checklist.";
+    }
+
+    document.getElementById('booking-card').style.display = 'block';
+    document.getElementById('spam-notice').style.display = 'block';
+
+    if (name) {
+      document.getElementById('detail-name').style.display = 'flex';
+      document.getElementById('val-name').textContent = name;
+    }
+    if (startTime) {
+      var d = new Date(startTime);
+      if (!isNaN(d.getTime())) {
+        document.getElementById('detail-date').style.display = 'flex';
+        document.getElementById('val-date').textContent = d.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+        document.getElementById('detail-time').style.display = 'flex';
+        document.getElementById('val-time').textContent = d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+      }
+    }
+    if (email) {
+      document.getElementById('detail-email').style.display = 'flex';
+      document.getElementById('val-email').textContent = email;
+    }
+    if (location) {
+      document.getElementById('detail-location').style.display = 'flex';
+      document.getElementById('val-location').textContent = formatLocation(location);
+    }
+  }
+})();
+</script>
+</body>
+</html>
