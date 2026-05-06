@@ -275,6 +275,57 @@
     .final-cta h3{font-size:24px;font-weight:800;color:var(--text-bright);line-height:1.25;margin-bottom:8px}
     .final-cta p{font-size:14px;margin-bottom:16px;color:var(--text-dim)}
 
+    .booking-modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:200;
+      padding:20px;
+      background:rgba(3,6,10,.72);
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+    }
+    .booking-modal.open{display:flex}
+    .booking-panel{
+      width:min(980px,96vw);
+      height:min(860px,92vh);
+      background:rgba(10,14,18,.92);
+      border:1px solid rgba(155,233,217,.28);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      display:flex;
+      flex-direction:column;
+    }
+    .booking-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:1px solid rgba(155,233,217,.18);
+      background:rgba(255,255,255,.02);
+    }
+    .booking-title{font-size:14px;font-weight:700;color:var(--text-bright)}
+    .booking-close{
+      border:1px solid var(--border);
+      background:transparent;
+      color:var(--text-dim);
+      border-radius:8px;
+      width:34px;
+      height:34px;
+      font-size:20px;
+      line-height:1;
+      cursor:pointer;
+    }
+    .booking-close:hover{color:var(--text-bright);border-color:rgba(155,233,217,.3)}
+    .booking-frame{flex:1;min-height:0}
+    .booking-frame iframe{width:100%;height:100%;border:0;overflow:hidden}
+
+    body.modal-open{overflow:hidden}
+
     footer{padding:42px 24px;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--text-dim)}
 
     @media(max-width:640px){
@@ -283,6 +334,8 @@
       .nav-links{display:none}
       .top-nav{padding:10px}
       .brand-name{font-size:16px}
+      .booking-modal{padding:0}
+      .booking-panel{width:100vw;height:100vh;border-radius:0;border:none}
     }
   </style>
 </head>
@@ -300,14 +353,14 @@
         <a class="nav-link" href="#process">How it Works</a>
         <a class="nav-link" href="#faq">FAQ</a>
       </div>
-      <a class="cta-btn" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Call</a>
+      <a class="cta-btn open-booking" href="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" target="_blank" rel="noopener">Book Call</a>
     </nav>
   </div>
   <section class="hero" id="top">
     <h1>You know AI matters.<br><span>You're just not using it.</span></h1>
     <p class="subtitle">We build you a private AI bot that knows your business, supports your operations, and works while you sleep. Not just another chatbot. A real operating partner.</p>
     <div class="cta-group">
-      <a class="cta-btn" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Your Setup Call</a>
+      <a class="cta-btn open-booking" href="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" target="_blank" rel="noopener">Book Your Setup Call</a>
       <a class="cta-secondary" href="#offer">See $5K Offer</a>
     </div>
   </section>
@@ -340,7 +393,7 @@
           <li>If 4 weeks is not enough to hit setup goals, we keep working in good faith until you're fully set up</li>
           <li>Optional follow-on support packages</li>
         </ul>
-        <a class="cta-btn" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Your Setup Call</a>
+        <a class="cta-btn open-booking" href="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" target="_blank" rel="noopener">Book Your Setup Call</a>
       </div>
     </div>
   </section>
@@ -401,7 +454,7 @@
       <div class="final-cta">
         <h3>Stop working for AI. Make AI work for you.</h3>
         <p>Book your setup call and we’ll map your fastest path to a working AI operating system.</p>
-        <a class="cta-btn" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Your Setup Call</a>
+        <a class="cta-btn open-booking" href="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" target="_blank" rel="noopener">Book Your Setup Call</a>
       </div>
     </div>
   </section>
@@ -434,11 +487,55 @@
     BotSetupCoach.com — independent AI implementation service
   </footer>
 
+  <div class="booking-modal" id="booking-modal" aria-hidden="true">
+    <div class="booking-panel" role="dialog" aria-modal="true" aria-label="Book your setup call">
+      <div class="booking-head">
+        <div class="booking-title">Book Your Setup Call</div>
+        <button class="booking-close" id="booking-close" aria-label="Close booking modal">×</button>
+      </div>
+      <div class="booking-frame">
+        <iframe src="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" scrolling="no" id="exiRqBMSpYXnVUWuF6zk_1778062815940" title="BotSetupCoach booking"></iframe>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.querySelectorAll('.faq-q').forEach(q => {
       q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
     });
+
+    const bookingModal = document.getElementById('booking-modal');
+    const bookingClose = document.getElementById('booking-close');
+
+    function openBookingModal() {
+      bookingModal.classList.add('open');
+      bookingModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeBookingModal() {
+      bookingModal.classList.remove('open');
+      bookingModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+
+    document.querySelectorAll('.open-booking').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openBookingModal();
+      });
+    });
+
+    bookingClose.addEventListener('click', closeBookingModal);
+    bookingModal.addEventListener('click', (e) => {
+      if (e.target === bookingModal) closeBookingModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && bookingModal.classList.contains('open')) closeBookingModal();
+    });
   </script>
+  <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
 
   <!-- Vercel Web Analytics -->
   <script>
