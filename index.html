@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦾</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#06080b;
@@ -22,6 +22,7 @@
       --yellow-glow:rgba(112,219,194,.18);
     }
     *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       font-family:'Inter',-apple-system,sans-serif;
       background:var(--bg);
@@ -33,6 +34,69 @@
     a{color:var(--yellow-light);text-decoration:none}
     a:hover{text-decoration:underline}
 
+    .top-nav-wrap{
+      position:fixed;
+      top:14px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(1120px,94vw);
+      z-index:100;
+    }
+    .top-nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      border:1px solid rgba(155,233,217,.24);
+      border-radius:16px;
+      background:rgba(17,22,27,.58);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      box-shadow:0 8px 32px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--text-bright);
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .brand:hover{text-decoration:none}
+    .brand-emoji{font-size:20px;line-height:1}
+    .brand-name{
+      font-family:'Space Grotesk','Inter',sans-serif;
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:-.02em;
+      color:var(--text-bright);
+    }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav-link{
+      color:var(--text-dim);
+      text-decoration:none;
+      font-size:14px;
+      font-weight:500;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:all .15s;
+      white-space:nowrap;
+    }
+    .nav-link:hover{
+      color:var(--text-bright);
+      border-color:rgba(155,233,217,.32);
+      background:rgba(112,219,194,.08);
+      text-decoration:none;
+    }
+
     .hero{
       min-height:100vh;
       display:flex;
@@ -40,13 +104,8 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:64px 24px;
+      padding:130px 24px 64px;
       background:radial-gradient(ellipse at 50% 28%,var(--yellow-glow) 0%,transparent 62%);
-    }
-    .hero-tag{
-      font-size:42px;
-      line-height:1;
-      margin-bottom:20px;
     }
     h1{
       font-size:clamp(2.1rem,5vw,3.6rem);
@@ -80,6 +139,13 @@
       box-shadow:0 4px 24px rgba(112,219,194,.30);
     }
     .cta-btn:hover{transform:translateY(-1px);background:#8fe5d3;text-decoration:none}
+    .top-nav .cta-btn{
+      padding:10px 16px;
+      font-size:14px;
+      border-radius:10px;
+      box-shadow:none;
+      white-space:nowrap;
+    }
     .cta-secondary{
       display:inline-flex;align-items:center;
       background:transparent;color:var(--text);
@@ -213,13 +279,31 @@
 
     @media(max-width:640px){
       .grid-2{grid-template-columns:1fr}
-      .hero{padding-top:88px}
+      .hero{padding-top:108px}
+      .nav-links{display:none}
+      .top-nav{padding:10px}
+      .brand-name{font-size:16px}
     }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <p class="hero-tag" aria-label="logo">🦾</p>
+  <div class="top-nav-wrap">
+    <nav class="top-nav">
+      <a class="brand" href="#top">
+        <span class="brand-emoji">🦾</span>
+        <span class="brand-name">BotSetupCoach</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="#problem">Problem</a>
+        <a class="nav-link" href="#offer">Pricing</a>
+        <a class="nav-link" href="#results">Results</a>
+        <a class="nav-link" href="#process">How it Works</a>
+        <a class="nav-link" href="#faq">FAQ</a>
+      </div>
+      <a class="cta-btn" href="https://askmiguel.ai/schedule" target="_blank" rel="noopener">Book Call</a>
+    </nav>
+  </div>
+  <section class="hero" id="top">
     <h1>You know AI matters.<br><span>You're just not using it.</span></h1>
     <p class="subtitle">We build you a private AI bot that knows your business, supports your operations, and works while you sleep. Not just another chatbot. A real operating partner.</p>
     <div class="cta-group">
@@ -228,7 +312,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="problem">
     <div class="container">
       <p class="eyebrow">The gap</p>
       <h2>Everyone has access to AI. Almost nobody has it working for them.</h2>
@@ -261,7 +345,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="results">
     <div class="container">
       <p class="eyebrow">What changes</p>
       <h2>This is what your day looks like after.</h2>
@@ -286,7 +370,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="process">
     <div class="container">
       <p class="eyebrow">How it works</p>
       <h2>We handle the technology. You get the business advantage.</h2>
@@ -322,7 +406,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="faq">
     <div class="container">
       <p class="eyebrow">Questions</p>
       <h2>Everything you need to know.</h2>
