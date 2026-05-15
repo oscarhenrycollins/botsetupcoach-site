@@ -282,15 +282,16 @@
       align-items:center;
       justify-content:center;
       z-index:2147483000;
-      padding:16px;
+      padding:14px;
       background:rgba(3,6,10,.72);
       backdrop-filter:blur(4px);
       -webkit-backdrop-filter:blur(4px);
     }
     .booking-modal.open{display:flex}
     .booking-panel{
-      width:min(1200px,98vw);
-      height:min(94vh,980px);
+      width:min(940px,96vw);
+      max-height:92dvh;
+      height:auto;
       background:#06080b;
       border:1px solid rgba(155,233,217,.24);
       border-radius:14px;
@@ -326,6 +327,7 @@
     .booking-frame{
       flex:1;
       min-height:0;
+      max-height:calc(92dvh - 56px);
       overflow:auto;
       overscroll-behavior:contain;
       -webkit-overflow-scrolling:touch;
@@ -334,8 +336,8 @@
     .booking-frame iframe{
       display:block;
       width:100%;
-      min-height:1500px;
-      height:1500px;
+      min-height:640px;
+      height:780px;
       border:0;
       background:#06080b;
     }
@@ -351,8 +353,9 @@
       .top-nav{padding:10px}
       .brand-name{font-size:16px}
       .booking-modal{padding:0}
-      .booking-panel{width:100vw;height:100vh;max-height:100vh;border-radius:0;border:none}
-      .booking-frame iframe{min-height:1700px;height:1700px}
+      .booking-panel{width:100vw;height:100dvh;max-height:100dvh;border-radius:0;border:none}
+      .booking-frame{max-height:calc(100dvh - 56px)}
+      .booking-frame iframe{min-height:calc(100dvh - 56px);height:calc(100dvh - 56px)}
     }
   </style>
 </head>
@@ -524,7 +527,24 @@
     const bookingModal = document.getElementById('booking-modal');
     const bookingClose = document.getElementById('booking-close');
 
+    function syncBookingSize() {
+      if (!bookingIframe) return;
+      const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+      if (isMobile) {
+        bookingIframe.style.height = '';
+        bookingIframe.style.minHeight = '';
+        return;
+      }
+
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const targetHeight = Math.max(620, Math.min(820, viewportHeight - 170));
+      bookingIframe.style.height = `${targetHeight}px`;
+      bookingIframe.style.minHeight = `${targetHeight}px`;
+    }
+
     function openBookingModal() {
+      syncBookingSize();
       bookingModal.classList.add('open');
       bookingModal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('modal-open');
@@ -557,6 +577,7 @@
     }
 
     applyAttributionParamsToBooking();
+    syncBookingSize();
 
     bookingLinks.forEach(el => {
       el.addEventListener('click', (e) => {
@@ -569,6 +590,8 @@
     bookingModal.addEventListener('click', (e) => {
       if (e.target === bookingModal) closeBookingModal();
     });
+
+    window.addEventListener('resize', syncBookingSize);
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && bookingModal.classList.contains('open')) closeBookingModal();
