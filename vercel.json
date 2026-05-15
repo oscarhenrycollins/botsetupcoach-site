@@ -1,0 +1,34 @@
+{
+  "redirects": [
+    {
+      "source": "/br",
+      "destination": "https://www.botsetupcoach.com/?source=referral&source_detail=Buddy%20Rushing&utm_source=referral&utm_medium=partner&utm_campaign=buddy_rushing",
+      "permanent": false
+    },
+    {
+      "source": "/br/",
+      "destination": "https://www.botsetupcoach.com/?source=referral&source_detail=Buddy%20Rushing&utm_source=referral&utm_medium=partner&utm_campaign=buddy_rushing",
+      "permanent": false
+    },
+    {
+      "source": "/jg",
+      "destination": "https://www.botsetupcoach.com/?source=referral&source_detail=Jared%20Gustafson&utm_source=referral&utm_medium=partner&utm_campaign=jared_gustafson",
+      "permanent": false
+    },
+    {
+      "source": "/jg/",
+      "destination": "https://www.botsetupcoach.com/?source=referral&source_detail=Jared%20Gustafson&utm_source=referral&utm_medium=partner&utm_campaign=jared_gustafson",
+      "permanent": false
+    },
+    {
+      "source": "/mk",
+      "destination": "https://www.botsetupcoach.com/?source=referral&source_detail=Michael%20Kudar&utm_source=referral&utm_medium=partner&utm_campaign=michael_kudar",
+      "permanent": false
+    },
+    {
+      "source": "/mk/",
+      "destination": "https://www.botsetupcoach.com/?source=referral&source_detail=Michael%20Kudar&utm_source=referral&utm_medium=partner&utm_campaign=michael_kudar",
+      "permanent": false
+    }
+  ]
+}
