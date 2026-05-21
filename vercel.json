@@ -29,6 +29,16 @@
       "source": "/mk/",
       "destination": "https://www.botsetupcoach.com/?utm_source=ref_michael_kudar",
       "permanent": false
+    },
+    {
+      "source": "/pn",
+      "destination": "https://www.botsetupcoach.com/?utm_source=ref_peter_nieves",
+      "permanent": false
+    },
+    {
+      "source": "/pn/",
+      "destination": "https://www.botsetupcoach.com/?utm_source=ref_peter_nieves",
+      "permanent": false
     }
   ]
 }
