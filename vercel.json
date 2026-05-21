@@ -49,6 +49,16 @@
       "source": "/hl/",
       "destination": "https://www.botsetupcoach.com/?utm_source=ref_humanity_labs",
       "permanent": false
+    },
+    {
+      "source": "/lw",
+      "destination": "https://www.botsetupcoach.com/?utm_source=ref_lisa_williams",
+      "permanent": false
+    },
+    {
+      "source": "/lw/",
+      "destination": "https://www.botsetupcoach.com/?utm_source=ref_lisa_williams",
+      "permanent": false
     }
   ]
 }
