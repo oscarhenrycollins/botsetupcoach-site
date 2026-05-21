@@ -5,16 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BotSetupCoach.com — Your Own AI Chief of Staff</title>
   <meta name="description" content="Done-for-you bot setup for business owners. One investment. Permanent advantage." />
-  <script>
-    (function(){
-      try {
-        var search = window.location.search || '';
-        if (!search || search === '?') return;
-        window.__attribution = search;
-        window.history.replaceState({}, '', window.location.pathname + window.location.hash);
-      } catch (_) {}
-    })();
-  </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦾</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -570,8 +560,7 @@
     const bookingLinks = Array.from(document.querySelectorAll('.open-booking'));
 
     function applyAttributionParamsToBooking() {
-      const stashed = window.__attribution || window.location.search || '';
-      const pageParams = new URLSearchParams(stashed);
+      const pageParams = new URLSearchParams(window.location.search || '');
       if (!pageParams.toString()) return;
 
       const bookingUrl = new URL('https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk');
