@@ -39,6 +39,16 @@
       "source": "/pn/",
       "destination": "https://www.botsetupcoach.com/?utm_source=ref_peter_nieves",
       "permanent": false
+    },
+    {
+      "source": "/hl",
+      "destination": "https://www.botsetupcoach.com/?utm_source=ref_humanity_labs",
+      "permanent": false
+    },
+    {
+      "source": "/hl/",
+      "destination": "https://www.botsetupcoach.com/?utm_source=ref_humanity_labs",
+      "permanent": false
     }
   ]
 }
