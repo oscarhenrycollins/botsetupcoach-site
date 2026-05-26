@@ -59,6 +59,16 @@
       "source": "/lw/",
       "destination": "https://www.botsetupcoach.com/?utm_source=ref_lisa_williams",
       "permanent": false
+    },
+    {
+      "source": "/ja",
+      "destination": "https://www.botsetupcoach.com/?utm_source=ref_joe_armstrong",
+      "permanent": false
+    },
+    {
+      "source": "/ja/",
+      "destination": "https://www.botsetupcoach.com/?utm_source=ref_joe_armstrong",
+      "permanent": false
     }
   ]
 }
