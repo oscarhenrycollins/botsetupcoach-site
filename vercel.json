@@ -2,72 +2,72 @@
   "redirects": [
     {
       "source": "/br",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_buddy_rushing",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_buddy_rushing",
       "permanent": false
     },
     {
       "source": "/br/",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_buddy_rushing",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_buddy_rushing",
       "permanent": false
     },
     {
       "source": "/jg",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_jared_gustafson",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_jared_gustafson",
       "permanent": false
     },
     {
       "source": "/jg/",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_jared_gustafson",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_jared_gustafson",
       "permanent": false
     },
     {
       "source": "/mk",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_michael_kudar",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_michael_kudar",
       "permanent": false
     },
     {
       "source": "/mk/",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_michael_kudar",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_michael_kudar",
       "permanent": false
     },
     {
       "source": "/pn",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_peter_nieves",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_peter_nieves",
       "permanent": false
     },
     {
       "source": "/pn/",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_peter_nieves",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_peter_nieves",
       "permanent": false
     },
     {
       "source": "/hl",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_humanity_labs",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_humanity_labs",
       "permanent": false
     },
     {
       "source": "/hl/",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_humanity_labs",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_humanity_labs",
       "permanent": false
     },
     {
       "source": "/lw",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_lisa_williams",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_lisa_williams",
       "permanent": false
     },
     {
       "source": "/lw/",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_lisa_williams",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_lisa_williams",
       "permanent": false
     },
     {
       "source": "/ja",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_joe_armstrong",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_joe_armstrong",
       "permanent": false
     },
     {
       "source": "/ja/",
-      "destination": "https://www.botsetupcoach.com/?utm_source=ref_joe_armstrong",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_joe_armstrong",
       "permanent": false
     }
   ]

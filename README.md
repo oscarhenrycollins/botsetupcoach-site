@@ -1,9 +1,9 @@
-# BotSetupCoach Landing Page
+# BotLaunch Landing Page
 
-Single-page static landing site for **BotSetupCoach.com**.
+Single-page static landing site for **BotLaunch / botlaunch.pro**.
 
 ## Offer Positioning
-- Done-for-you OpenClaw setup for business owners
+- Done-for-you AI implementation for business owners
 - $5,000 fixed implementation
 - Primary CTA: free strategy call
 
