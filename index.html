@@ -1,601 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BotLaunch — Your Own AI Chief of Staff</title>
   <meta name="description" content="Done-for-you AI implementation for business owners. One investment. Permanent advantage." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦾</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#06080b;
-      --bg-card:#11161b;
-      --border:#2b3a42;
-      --text:#e2e8f0;
-      --text-dim:#94a3b8;
-      --text-bright:#f8fafc;
-      --yellow:#70dbc2; /* askmiguel primary: hsl(166 60% 65%) */
-      --yellow-light:#9be9d9;
-      --yellow-glow:rgba(112,219,194,.18);
+      --bg:#000;
+      --ink:#f7fffd;
+      --muted:rgba(247,255,253,.72);
+      --soft:rgba(247,255,253,.55);
+      --line:rgba(255,255,255,.12);
+      --accent:#70e0cf;
+      --accent-2:#0f766e;
+      --paper:#f2f8f6;
+      --paper-ink:#08110f;
+      --card:#07100e;
+      --display:'Anton','Impact','Arial Narrow',sans-serif;
+      --body:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     }
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Inter',-apple-system,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.7;
-      -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
-    }
-    a{color:var(--yellow-light);text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .top-nav-wrap{
-      position:fixed;
-      top:14px;
-      left:50%;
-      transform:translateX(-50%);
-      width:min(1120px,94vw);
-      z-index:100;
-    }
-    .top-nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 12px;
-      border:1px solid rgba(155,233,217,.24);
-      border-radius:16px;
-      background:rgba(17,22,27,.58);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
-      box-shadow:0 8px 32px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05);
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      color:var(--text-bright);
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .brand:hover{text-decoration:none}
-    .brand-emoji{font-size:20px;line-height:1}
-    .brand-name{
-      font-family:'Space Grotesk','Inter',sans-serif;
-      font-size:18px;
-      font-weight:700;
-      letter-spacing:-.02em;
-      color:var(--text-bright);
-    }
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .nav-link{
-      color:var(--text-dim);
-      text-decoration:none;
-      font-size:14px;
-      font-weight:500;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid transparent;
-      transition:all .15s;
-      white-space:nowrap;
-    }
-    .nav-link:hover{
-      color:var(--text-bright);
-      border-color:rgba(155,233,217,.32);
-      background:rgba(112,219,194,.08);
-      text-decoration:none;
-    }
-
-    .hero{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:130px 24px 64px;
-      background:radial-gradient(ellipse at 50% 28%,var(--yellow-glow) 0%,transparent 62%);
-    }
-    h1{
-      font-size:clamp(2.1rem,5vw,3.6rem);
-      font-weight:800;
-      color:var(--text-bright);
-      letter-spacing:-.03em;
-      line-height:1.12;
-      max-width:760px;
-      margin-bottom:18px;
-    }
-    h1 span{
-      background:linear-gradient(135deg,var(--yellow),var(--yellow-light));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-    }
-    .subtitle{
-      font-size:clamp(1rem,2vw,1.18rem);
-      color:var(--text-dim);
-      max-width:680px;
-      line-height:1.65;
-      margin-bottom:34px;
-    }
-    .cta-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center}
-    .cta-btn{
-      display:inline-flex;align-items:center;gap:8px;
-      background:var(--yellow);color:#111;
-      padding:14px 30px;border-radius:12px;
-      font-size:16px;font-weight:700;border:none;cursor:pointer;
-      transition:all .15s;text-decoration:none;
-      box-shadow:0 4px 24px rgba(112,219,194,.30);
-    }
-    .cta-btn:hover{transform:translateY(-1px);background:#8fe5d3;text-decoration:none}
-    .top-nav .cta-btn{
-      padding:10px 16px;
-      font-size:14px;
-      border-radius:10px;
-      box-shadow:none;
-      white-space:nowrap;
-    }
-    .cta-secondary{
-      display:inline-flex;align-items:center;
-      background:transparent;color:var(--text);
-      padding:14px 26px;border-radius:12px;
-      font-size:15px;font-weight:500;border:1px solid var(--border);
-      transition:all .15s;text-decoration:none;
-    }
-    .cta-secondary:hover{border-color:var(--yellow);text-decoration:none}
-
-    .section{padding:82px 24px}
-    .container{max-width:760px;margin:0 auto}
-    .section h2{
-      font-size:clamp(1.5rem,3vw,2rem);
-      font-weight:700;
-      color:var(--text-bright);
-      margin-bottom:12px;
-      letter-spacing:-.02em;
-      line-height:1.2;
-    }
-    .section .eyebrow{
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.11em;
-      color:var(--text-dim);
-      font-weight:700;
-      margin-bottom:12px;
-    }
-    .section p{color:var(--text-dim);font-size:15.5px;line-height:1.8;margin-bottom:16px}
-    .section p strong{color:var(--text-bright)}
-
-    .quote-card{
-      margin-top:20px;
-      background:var(--bg-card);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:24px;
-    }
-    .quote-line{
-      border-left:3px solid var(--yellow);
-      padding-left:16px;
-      margin-top:8px;
-      color:var(--text-bright);
-      font-weight:600;
-      line-height:1.65;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-      margin-top:26px;
-    }
-    .card{
-      background:var(--bg-card);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:22px;
-    }
-    .card h3{font-size:16px;font-weight:700;color:var(--text-bright);margin-bottom:8px}
-    .card p{font-size:13.5px;color:var(--text-dim);line-height:1.7;margin:0}
-
-    .steps{display:flex;flex-direction:column;gap:14px;margin-top:22px}
-    .step{
-      display:flex;gap:14px;align-items:flex-start;
-      background:var(--bg-card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:16px 18px;
-    }
-    .step-num{
-      width:30px;height:30px;border-radius:8px;
-      background:var(--yellow-glow);
-      border:1px solid rgba(112,219,194,.4);
-      color:var(--yellow-light);
-      font-size:13px;font-weight:800;
-      display:flex;align-items:center;justify-content:center;flex-shrink:0;
-      margin-top:2px;
-    }
-    .step h4{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:4px}
-    .step p{font-size:13.5px;margin:0}
-
-    .offer-card{
-      margin-top:24px;
-      background:var(--bg-card);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:28px;
-      position:relative;
-      overflow:hidden;
-    }
-    .offer-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:2px;
-      background:linear-gradient(90deg,transparent,var(--yellow),transparent);
-      opacity:.9;
-    }
-    .price{font-size:clamp(2.1rem,5vw,3rem);font-weight:800;color:var(--text-bright);letter-spacing:-.03em}
-    .price-sub{font-size:13px;color:var(--text-dim);margin:4px 0 18px}
-    .offer-list{list-style:none;display:grid;gap:11px;margin:0 0 20px;padding:0}
-    .offer-list li{font-size:14px;color:var(--text-dim);padding-left:16px;position:relative}
-    .offer-list li::before{content:'•';position:absolute;left:0;color:var(--yellow)}
-
-    .faq-item{
-      background:var(--bg-card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:0 16px;
-      margin-top:10px;
-    }
-    .faq-q{
-      font-size:15px;font-weight:600;color:var(--text-bright);
-      padding:15px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
-    }
-    .faq-q::after{content:'+';color:var(--yellow);font-size:20px;line-height:1;transition:transform .2s}
-    .faq-item.open .faq-q::after{transform:rotate(45deg)}
-    .faq-a{max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease, opacity .3s ease;padding-right:10px}
-    .faq-a p{font-size:14px;margin:0 0 14px}
-    .faq-item.open .faq-a{max-height:220px;opacity:1}
-
-    .final-cta{
-      margin-top:28px;
-      background:linear-gradient(135deg,rgba(112,219,194,.12),rgba(112,219,194,.04));
-      border:1px solid rgba(112,219,194,.3);
-      border-radius:16px;
-      padding:22px;
-      text-align:center;
-    }
-    .final-cta h3{font-size:24px;font-weight:800;color:var(--text-bright);line-height:1.25;margin-bottom:8px}
-    .final-cta p{font-size:14px;margin-bottom:16px;color:var(--text-dim)}
-
-    .booking-modal{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:2147483000;
-      padding:14px;
-      background:rgba(3,6,10,.72);
-      backdrop-filter:blur(4px);
-      -webkit-backdrop-filter:blur(4px);
-    }
-    .booking-modal.open{display:flex}
-    .booking-panel{
-      width:min(940px,96vw);
-      max-height:92dvh;
-      height:auto;
-      background:#06080b;
-      border:1px solid rgba(155,233,217,.24);
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:0 18px 48px rgba(0,0,0,.45);
-      display:flex;
-      flex-direction:column;
-    }
-    .booking-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 12px;
-      border-bottom:1px solid rgba(155,233,217,.16);
-      background:rgba(255,255,255,.01);
-      flex:0 0 auto;
-    }
-    .booking-title{font-size:14px;font-weight:700;color:var(--text-bright)}
-    .booking-close{
-      border:1px solid var(--border);
-      background:transparent;
-      color:var(--text-dim);
-      border-radius:8px;
-      width:34px;
-      height:34px;
-      font-size:20px;
-      line-height:1;
-      cursor:pointer;
-      flex:0 0 auto;
-    }
-    .booking-close:hover{color:var(--text-bright);border-color:rgba(155,233,217,.3)}
-    .booking-frame{
-      flex:1;
-      min-height:0;
-      max-height:calc(92dvh - 56px);
-      overflow:auto;
-      overscroll-behavior:contain;
-      -webkit-overflow-scrolling:touch;
-      background:#06080b;
-    }
-    .booking-frame iframe{
-      display:block;
-      width:100%;
-      min-height:640px;
-      height:780px;
-      border:0;
-      background:#06080b;
-    }
-
-    body.modal-open{overflow:hidden}
-
-    footer{padding:42px 24px;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--text-dim)}
-
-    @media(max-width:640px){
-      .grid-2{grid-template-columns:1fr}
-      .hero{padding-top:108px}
-      .nav-links{display:none}
-      .top-nav{padding:10px}
-      .brand-name{font-size:16px}
-      .booking-modal{padding:0}
-      .booking-panel{width:100vw;height:100dvh;max-height:100dvh;border-radius:0;border:none}
-      .booking-frame{max-height:calc(100dvh - 56px)}
-      .booking-frame iframe{min-height:calc(100dvh - 56px);height:calc(100dvh - 56px)}
-    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;background:#000}
+    body{font-family:var(--body);background:#000;color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button,a{touch-action:manipulation}
+    .nav{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(18px,4vw,48px)}
+    .brand{display:flex;align-items:center;gap:10px;font-size:clamp(1.3rem,2.4vw,2rem);font-weight:800;letter-spacing:-.055em;color:white}.brand-mark{width:34px;height:34px;border:3px solid var(--accent);border-radius:12px;display:grid;place-items:center;box-shadow:0 0 22px rgba(112,224,207,.34),inset 0 0 0 5px #020403;color:var(--accent);font-size:17px}.brand span span{color:var(--accent)}
+    .nav-cta{border:0;border-radius:999px;background:var(--accent);color:#020403;padding:10px 18px;font-size:.78rem;font-weight:950;text-transform:uppercase;letter-spacing:.12em;cursor:pointer}
+    .hero{min-height:100vh;display:grid;place-items:center;padding:112px 20px 72px;text-align:center;background:radial-gradient(circle at 50% -12%,rgba(112,224,207,.16),transparent 34%),linear-gradient(180deg,rgba(2,4,3,.96),#000 58%,#030504)}
+    .wrap{width:min(940px,100%);margin:0 auto}.kicker{margin-bottom:14px;font-size:.72rem;font-weight:950;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+    h1,.display{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:-.035em;line-height:.88;text-wrap:balance}h1{font-size:clamp(4.4rem,12vw,10rem);color:white;filter:drop-shadow(0 18px 34px rgba(0,0,0,.5))}h1 .accent{display:block;margin-top:.08em;color:var(--accent);font-size:clamp(3.2rem,8vw,7rem)}
+    .hero-copy{max-width:760px;margin:28px auto 22px;color:rgba(255,255,255,.9);font-size:clamp(1.25rem,2.5vw,2rem);line-height:1.12;letter-spacing:-.035em;text-wrap:balance}.cta-main{display:inline-flex;align-items:center;justify-content:center;min-height:58px;border:0;border-radius:999px;background:var(--accent);color:#020403;padding:18px 34px;font-weight:950;text-transform:uppercase;letter-spacing:.04em;box-shadow:0 20px 52px rgba(112,224,207,.25);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}.cta-main:hover{transform:translateY(-2px);background:#8eeee1;box-shadow:0 26px 70px rgba(112,224,207,.34)}.under-link{display:block;width:max-content;margin:16px auto 0;border-bottom:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.74);font-size:.92rem}.under-link:hover{color:white}
+    .vsl-card{position:relative;width:min(780px,100%);aspect-ratio:16/9;margin:36px auto 0;overflow:hidden;border:1px solid rgba(112,224,207,.28);background:linear-gradient(145deg,#06100e,#020403);box-shadow:0 30px 90px rgba(0,0,0,.48),0 0 80px rgba(112,224,207,.13);display:grid;place-items:center;cursor:pointer}.vsl-card:hover .device{transform:translateY(-3px) scale(1.012)}.replace-tag{position:absolute;top:14px;left:14px;border:1px solid rgba(112,224,207,.35);background:rgba(0,0,0,.58);backdrop-filter:blur(10px);color:rgba(255,255,255,.8);border-radius:999px;padding:8px 12px;font-size:.72rem;font-weight:850;text-transform:uppercase;letter-spacing:.12em}.scan-lines{position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:100% 12px;opacity:.35;pointer-events:none}.orb{position:absolute;width:58%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(112,224,207,.28),rgba(112,224,207,.04) 55%,transparent 70%);filter:blur(2px)}.device{position:relative;width:min(540px,82%);border:1px solid rgba(112,224,207,.25);border-radius:26px;background:rgba(1,6,5,.84);padding:22px;box-shadow:0 24px 70px rgba(0,0,0,.46);transition:.45s ease;text-align:left}.device-top{display:flex;align-items:center;gap:8px;margin-bottom:18px}.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2)}.device-title{margin-left:auto;color:rgba(255,255,255,.48);font-size:.76rem}.bot-row{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}.avatar{width:44px;height:44px;border-radius:14px;background:rgba(112,224,207,.16);display:grid;place-items:center;color:var(--accent);font-size:22px}.message{border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.04);padding:16px;color:rgba(255,255,255,.86);font-weight:650}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.chip{border:1px solid rgba(112,224,207,.24);border-radius:999px;padding:7px 10px;color:var(--accent);font-size:.76rem;font-weight:800;background:rgba(112,224,207,.06)}
+    section{padding:86px 20px}.dark{background:#000}.paper{background:linear-gradient(145deg,#eef5f3,#fbfffe 48%,#fff);color:var(--paper-ink);box-shadow:inset 0 14px 24px rgba(0,0,0,.22)}.section-title{max-width:980px;margin:0 auto;text-align:center;font-size:clamp(3.2rem,8vw,7.2rem);color:var(--accent)}.paper .section-title{color:#06110f}.section-title .accent{display:block;color:var(--accent-2)}.big-copy{max-width:880px;margin:28px auto 0;text-align:center;font-size:clamp(1.35rem,3vw,2.35rem);line-height:1.08;letter-spacing:-.04em;color:rgba(255,255,255,.9);text-wrap:balance}.paper .big-copy{color:#17211f}
+    .quote{width:min(860px,100%);margin:38px auto 0;border-left:4px solid var(--accent);padding:26px 30px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border-radius:0 24px 24px 0;color:white;font-size:clamp(1.2rem,2vw,1.7rem);line-height:1.25;letter-spacing:-.03em}.quote span{color:var(--accent);font-weight:900}
+    .offer{width:min(960px,100%);margin:0 auto;padding:clamp(28px,5vw,58px);border:1px solid rgba(0,0,0,.10);border-radius:30px;background:rgba(255,255,255,.72);box-shadow:0 24px 70px rgba(7,16,14,.12);text-align:center}.price{font-family:var(--display);font-size:clamp(4rem,9vw,8rem);line-height:.9;letter-spacing:-.04em;color:#06110f}.price-sub{margin-top:8px;color:#465652;font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.76rem}.offer-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:32px auto 0;text-align:left;max-width:820px}.offer-list li{list-style:none;border:1px solid rgba(0,0,0,.08);border-radius:16px;background:white;padding:16px 18px;color:#20312d;font-weight:650}.offer-list li:before{content:'•';color:var(--accent-2);font-weight:900;margin-right:8px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(980px,100%);margin:38px auto 0}.card{border:1px solid rgba(255,255,255,.11);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));padding:24px}.card h3{font-size:clamp(2rem,4vw,3.5rem);color:white}.card ul{margin-top:14px;display:grid;gap:10px}.card li{list-style:none;color:var(--muted)}.card li:before{content:'— ';color:var(--accent)}.card.after{border-color:rgba(112,224,207,.28);box-shadow:0 0 42px rgba(112,224,207,.08)}.card.after h3{color:var(--accent)}
+    .steps{width:min(880px,100%);margin:38px auto 0;display:grid;gap:14px}.step{display:grid;grid-template-columns:54px 1fr;gap:16px;align-items:start;border:1px solid rgba(255,255,255,.11);border-radius:20px;background:#070f0d;padding:20px}.num{width:54px;height:54px;border-radius:16px;background:rgba(112,224,207,.11);border:1px solid rgba(112,224,207,.32);color:var(--accent);display:grid;place-items:center;font-weight:950}.step h3{color:white;font-size:1.1rem}.step p{color:var(--muted);margin-top:4px}.faq{width:min(820px,100%);margin:38px auto 0}.faq details{border:1px solid rgba(255,255,255,.12);border-radius:16px;background:#070f0d;margin-bottom:12px;overflow:hidden}.faq summary{list-style:none;cursor:pointer;padding:19px 22px;font-weight:850}.faq summary::-webkit-details-marker{display:none}.faq p{padding:0 22px 20px;color:var(--muted)}.final{width:min(920px,100%);margin:0 auto;text-align:center;border:1px solid rgba(112,224,207,.24);border-radius:30px;background:radial-gradient(circle at 50% 0,rgba(112,224,207,.13),rgba(255,255,255,.03) 45%,rgba(255,255,255,.01));padding:clamp(30px,5vw,58px);box-shadow:0 24px 80px rgba(0,0,0,.35)}
+    footer{padding:38px 20px;border-top:1px solid rgba(255,255,255,.1);text-align:center;color:rgba(255,255,255,.48);font-size:.86rem;background:#000}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9999;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}.modal.open{display:flex}.panel{width:min(960px,96vw);max-height:92dvh;border:1px solid rgba(112,224,207,.24);border-radius:18px;background:#030504;overflow:hidden;box-shadow:0 28px 80px rgba(0,0,0,.55)}.panel-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:800}.close{width:36px;height:36px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:transparent;color:white;font-size:22px;cursor:pointer}.panel iframe{display:block;width:100%;height:720px;max-height:calc(92dvh - 62px);border:0;background:white}body.modal-open{overflow:hidden}
+    @media(max-width:760px){.nav{padding:16px}.brand{font-size:1.3rem}.nav-cta{padding:9px 12px}.hero{min-height:auto;padding-top:104px}.cta-main{width:100%;padding-inline:18px}.vsl-card{margin-top:30px;aspect-ratio:auto;min-height:190px;padding:70px 16px 26px}.replace-tag{left:16px;right:16px;text-align:center;white-space:normal;z-index:2}.device{width:100%;padding:16px}.section-title{font-size:clamp(3rem,15vw,5rem)}section{padding:70px 18px}.offer-list,.split{grid-template-columns:1fr}.step{grid-template-columns:44px 1fr}.num{width:44px;height:44px}.modal{padding:0}.panel{width:100vw;height:100dvh;max-height:100dvh;border-radius:0;border:0}.panel iframe{height:calc(100dvh - 62px);max-height:none}}
   </style>
 </head>
 <body>
-  <div class="top-nav-wrap">
-    <nav class="top-nav">
-      <a class="brand" href="#top">
-        <span class="brand-emoji">🦾</span>
-        <span class="brand-name">BotLaunch</span>
-      </a>
-      <div class="nav-links">
-        <a class="nav-link" href="#problem">Problem</a>
-        <a class="nav-link" href="#offer">Pricing</a>
-        <a class="nav-link" href="#results">Results</a>
-        <a class="nav-link" href="#process">How it Works</a>
-        <a class="nav-link" href="#faq">FAQ</a>
-      </div>
-      <a class="cta-btn open-booking" href="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" target="_blank" rel="noopener">Book Call</a>
-    </nav>
-  </div>
-  <section class="hero" id="top">
-    <h1>You know AI matters.<br><span>You're just not using it.</span></h1>
-    <p class="subtitle">We build you a private AI bot that knows your business, supports your operations, and works while you sleep. Not just another chatbot. A real operating partner.</p>
-    <div class="cta-group">
-      <a class="cta-btn open-booking" href="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" target="_blank" rel="noopener">Book Your Setup Call</a>
-      <a class="cta-secondary" href="#offer">See $5K Offer</a>
-    </div>
-  </section>
+  <header class="nav">
+    <a class="brand" href="#top"><span class="brand-mark">🦾</span><span>Bot<span>Launch</span></span></a>
+    <button class="nav-cta js-book">Book</button>
+  </header>
 
-  <section class="section" id="problem">
-    <div class="container">
-      <p class="eyebrow">The gap</p>
-      <h2>Everyone has access to AI. Almost nobody has it working for them.</h2>
-      <div class="quote-card">
-        <p>You open ChatGPT. You type a question. You get an answer. You close the tab.</p>
-        <p class="quote-line">That is not AI working for you. That is you working for AI.</p>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">Done-for-you AI implementation</p>
+        <h1>Stop Working <span class="accent">For AI</span></h1>
+        <p class="hero-copy">We build you a private AI bot that knows your business, supports your operations, and works while you sleep.</p>
+        <button class="cta-main js-book">Book Your Setup Call</button>
+        <a class="under-link" href="#offer">See The $5K Offer</a>
       </div>
-      <p style="margin-top:16px">Imagine something different: a bot that <strong>knows your business</strong>, <strong>remembers your conversations</strong>, <strong>runs in the background</strong>, and <strong>messages you</strong> when something needs attention.</p>
-      <p>That is what we build for you.</p>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="offer">
-    <div class="container">
-      <p class="eyebrow">Pricing</p>
-      <h2>One investment. Permanent advantage.</h2>
-      <div class="offer-card">
+    <section class="dark" id="problem">
+      <h2 class="display section-title">You Know AI Matters</h2>
+      <p class="big-copy">You open ChatGPT. You type a question. You get an answer. You close the tab.</p>
+      <div class="quote">That is not AI working for you. <span>That is you working for AI.</span></div>
+      <p class="big-copy">BotLaunch turns AI into an operating layer: a private bot that remembers your business, runs in the background, and messages you when something needs attention.</p>
+    </section>
+
+    <section class="paper" id="offer">
+      <div class="offer">
+        <p class="kicker" style="color:var(--accent-2)">One investment · permanent advantage</p>
+        <h2 class="display section-title">Your Own AI <span class="accent">Chief Of Staff</span></h2>
         <div class="price">$5k</div>
-        <div class="price-sub">Simple, transparent one-time setup. No hidden fees.</div>
+        <p class="price-sub">Simple, transparent one-time setup · no hidden setup fees</p>
         <ul class="offer-list">
           <li>Personal strategy call to map your workflows</li>
           <li>Full private AI bot setup and configuration</li>
           <li>Connected to your phone, computer, and tools</li>
-          <li>4 weeks of ongoing support throughout your setup period</li>
-          <li>If 4 weeks is not enough to hit setup goals, we keep working in good faith until you're fully set up</li>
+          <li>4 weeks of ongoing support throughout setup</li>
+          <li>Good-faith extension if setup goals need more time</li>
           <li>Optional follow-on support packages</li>
         </ul>
-        <a class="cta-btn open-booking" href="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" target="_blank" rel="noopener">Book Your Setup Call</a>
+        <button class="cta-main js-book" style="margin-top:32px">Book Your Setup Call</button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="results">
-    <div class="container">
-      <p class="eyebrow">What changes</p>
-      <h2>This is what your day looks like after.</h2>
-      <div class="grid-2">
-        <article class="card">
-          <h3>Before</h3>
-          <p>Random prompts. One-off answers. No memory. No system.</p>
-        </article>
-        <article class="card">
-          <h3>After</h3>
-          <p>A private bot that remembers, automates, and helps you execute daily.</p>
-        </article>
-        <article class="card">
-          <h3>Before</h3>
-          <p>Manual checking, repeated tasks, and constant context switching.</p>
-        </article>
-        <article class="card">
-          <h3>After</h3>
-          <p>Proactive updates, background tasks, and a clear operating rhythm.</p>
-        </article>
+    <section class="dark" id="results">
+      <p class="kicker" style="text-align:center">What changes</p>
+      <h2 class="display section-title">Your Day After <span class="accent">BotLaunch</span></h2>
+      <div class="split">
+        <article class="card"><h3 class="display">Before</h3><ul><li>Random prompts and one-off answers</li><li>No memory of your business</li><li>Manual checking and repeated tasks</li><li>Constant context switching</li></ul></article>
+        <article class="card after"><h3 class="display">After</h3><ul><li>A private bot that remembers</li><li>Automations running in the background</li><li>Proactive updates and follow-ups</li><li>A clearer daily operating rhythm</li></ul></article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="process">
-    <div class="container">
-      <p class="eyebrow">How it works</p>
-      <h2>We handle the technology. You get the business advantage.</h2>
+    <section class="dark" id="process">
+      <p class="kicker" style="text-align:center">How it works</p>
+      <h2 class="display section-title">We Handle The Tech</h2>
+      <p class="big-copy">You get the business advantage without needing to become the AI person.</p>
       <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div>
-            <h4>Setup call</h4>
-            <p>We map your workflows, bottlenecks, and highest-leverage use cases.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div>
-            <h4>Build + connect</h4>
-            <p>We deploy and configure your private bot across your channels and tools.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div>
-          <h4>4 weeks of ongoing support</h4>
-          <p>We optimize, train, and expand your setup during onboarding. If we need more time to complete setup goals, we keep working in good faith until you're fully set up.</p>
-          </div>
-        </div>
+        <article class="step"><div class="num">1</div><div><h3>Setup call</h3><p>We map your workflows, bottlenecks, and highest-leverage use cases.</p></div></article>
+        <article class="step"><div class="num">2</div><div><h3>Build + connect</h3><p>We deploy and configure your private bot across your channels and tools.</p></div></article>
+        <article class="step"><div class="num">3</div><div><h3>4 weeks of support</h3><p>We optimize, train, and expand your setup during onboarding. If more time is needed to hit setup goals, we keep working in good faith.</p></div></article>
       </div>
+    </section>
 
-      <div class="final-cta">
-        <h3>Stop working for AI. Make AI work for you.</h3>
-        <p>Book your setup call and we’ll map your fastest path to a working AI operating system.</p>
-        <a class="cta-btn open-booking" href="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" target="_blank" rel="noopener">Book Your Setup Call</a>
+    <section class="dark" id="faq">
+      <p class="kicker" style="text-align:center">Questions</p>
+      <h2 class="display section-title">Everything You Need <span class="accent">To Know</span></h2>
+      <div class="faq">
+        <details><summary>Do I need to be technical?</summary><p>No. We handle the technical setup and guide you through practical usage.</p></details>
+        <details><summary>Is my data private?</summary><p>Yes. Your setup is private and under your control.</p></details>
+        <details><summary>Are there ongoing costs?</summary><p>Yes. Hosting and model usage have ongoing costs. Expected ranges are explained on your call.</p></details>
+        <details><summary>Who is this for?</summary><p>Business owners who want AI embedded into daily operations, not just occasional prompt usage.</p></details>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="faq">
-    <div class="container">
-      <p class="eyebrow">Questions</p>
-      <h2>Everything you need to know.</h2>
+    <section class="dark">
+      <div class="final">
+        <h2 class="display section-title" style="color:white">Make AI Work <span class="accent">For You</span></h2>
+        <p class="big-copy" style="margin-top:18px">Book your setup call and we’ll map your fastest path to a working AI operating system.</p>
+        <button class="cta-main js-book" style="margin-top:32px">Book Your Setup Call</button>
+      </div>
+    </section>
+  </main>
 
-      <div class="faq-item">
-        <div class="faq-q">Do I need to be technical?</div>
-        <div class="faq-a"><p>No. We handle the technical setup and guide you through practical usage.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Is my data private?</div>
-        <div class="faq-a"><p>Yes. Your setup is private and under your control.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Are there ongoing costs?</div>
-        <div class="faq-a"><p>Yes. Hosting and model usage have ongoing costs. We explain expected ranges on your call.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Who is this for?</div>
-        <div class="faq-a"><p>Business owners who want AI embedded into daily operations, not just occasional prompt usage.</p></div>
-      </div>
-    </div>
-  </section>
+  <footer>BotLaunch — independent AI implementation service</footer>
 
-  <footer>
-    BotLaunch — independent AI implementation service
-  </footer>
-
-  <div class="booking-modal" id="booking-modal" aria-hidden="true">
-    <div class="booking-panel" role="dialog" aria-modal="true" aria-label="Book your setup call">
-      <div class="booking-head">
-        <div class="booking-title">Book Your Setup Call</div>
-        <button class="booking-close" id="booking-close" aria-label="Close booking modal">×</button>
-      </div>
-      <div class="booking-frame">
-        <iframe src="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" scrolling="yes" id="exiRqBMSpYXnVUWuF6zk_1778062815940" title="BotLaunch booking"></iframe>
-      </div>
+  <div class="modal" id="booking-modal" aria-hidden="true">
+    <div class="panel" role="dialog" aria-modal="true" aria-label="Book your setup call">
+      <div class="panel-head"><span>Book Your Setup Call</span><button class="close" id="close-modal" aria-label="Close">×</button></div>
+      <iframe src="about:blank" data-src="https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk" title="BotLaunch booking preview"></iframe>
     </div>
   </div>
 
   <script>
-    document.querySelectorAll('.faq-q').forEach(q => {
-      q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
-    });
+    const modal = document.getElementById('booking-modal');
+    const openers = document.querySelectorAll('.js-book');
+    const close = document.getElementById('close-modal');
+    const bookingFrame = modal.querySelector('iframe');
 
-    const bookingModal = document.getElementById('booking-modal');
-    const bookingClose = document.getElementById('booking-close');
-
-    function syncBookingSize() {
-      if (!bookingIframe) return;
-      const isMobile = window.matchMedia('(max-width: 640px)').matches;
-
-      if (isMobile) {
-        bookingIframe.style.height = '';
-        bookingIframe.style.minHeight = '';
-        return;
+    function bookingUrlWithAttribution() {
+      const base = bookingFrame?.dataset?.src || 'https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk';
+      const bookingUrl = new URL(base);
+      const pageParams = new URLSearchParams(window.location.search || '');
+      for (const [key, value] of pageParams.entries()) {
+        if (!bookingUrl.searchParams.has(key)) bookingUrl.searchParams.set(key, value);
       }
-
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-      const targetHeight = Math.max(620, Math.min(820, viewportHeight - 170));
-      bookingIframe.style.height = `${targetHeight}px`;
-      bookingIframe.style.minHeight = `${targetHeight}px`;
+      return bookingUrl.toString();
     }
 
-    function openBookingModal() {
-      syncBookingSize();
-      bookingModal.classList.add('open');
-      bookingModal.setAttribute('aria-hidden', 'false');
+    function openModal(){
+      if (bookingFrame && bookingFrame.getAttribute('src') === 'about:blank') bookingFrame.src = bookingUrlWithAttribution();
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
       document.body.classList.add('modal-open');
     }
 
-    function closeBookingModal() {
-      bookingModal.classList.remove('open');
-      bookingModal.setAttribute('aria-hidden', 'true');
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
       document.body.classList.remove('modal-open');
     }
 
-    const bookingIframe = document.querySelector('.booking-frame iframe');
-    const bookingLinks = Array.from(document.querySelectorAll('.open-booking'));
-
-    function applyAttributionParamsToBooking() {
-      const pageParams = new URLSearchParams(window.location.search || '');
-      if (!pageParams.toString()) return;
-
-      const bookingUrl = new URL('https://api.leadconnectorhq.com/widget/booking/exiRqBMSpYXnVUWuF6zk');
-      for (const [key, value] of pageParams.entries()) {
-        if (!bookingUrl.searchParams.has(key)) {
-          bookingUrl.searchParams.set(key, value);
-        }
-      }
-
-      if (bookingIframe) bookingIframe.src = bookingUrl.toString();
-      bookingLinks.forEach((link) => {
-        link.href = bookingUrl.toString();
-      });
-    }
-
-    applyAttributionParamsToBooking();
-    syncBookingSize();
-
-    bookingLinks.forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        openBookingModal();
-      });
-    });
-
-    bookingClose.addEventListener('click', closeBookingModal);
-    bookingModal.addEventListener('click', (e) => {
-      if (e.target === bookingModal) closeBookingModal();
-    });
-
-    window.addEventListener('resize', syncBookingSize);
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && bookingModal.classList.contains('open')) closeBookingModal();
-    });
+    openers.forEach(el => el.addEventListener('click', openModal));
+    close.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
   </script>
   <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
 
