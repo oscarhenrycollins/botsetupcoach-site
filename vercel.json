@@ -69,6 +69,16 @@
       "source": "/ja/",
       "destination": "https://www.botlaunch.pro/?utm_source=ref_joe_armstrong",
       "permanent": false
+    },
+    {
+      "source": "/njf",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_nolan_james_fyfe",
+      "permanent": false
+    },
+    {
+      "source": "/njf/",
+      "destination": "https://www.botlaunch.pro/?utm_source=ref_nolan_james_fyfe",
+      "permanent": false
     }
   ]
 }
